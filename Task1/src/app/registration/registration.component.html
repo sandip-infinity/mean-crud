@@ -1,0 +1,57 @@
+<div class="container">
+  <header>
+          <div layout="row" >
+              <img src="https://cdn.onlinewebfonts.com/svg/img_464825.png">
+              <h1 style="color:white">Register Employee</h1>
+          </div>
+  </header>
+  <form  [formGroup]="userForm1" (ngSubmit)="onSubmit()">
+          <mat-grid-list cols="2" rowHeight="2:1">
+
+                  <mat-grid-tile>
+                          <mat-form-field class="Form-Group">
+                                  <input matInput placeholder="Enter Your First Name" formControlName="fnm" #fnm>
+                          </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile>
+                          <mat-form-field class="Form-Group" >
+                                  <input matInput placeholder="Enter Your Last Name" formControlName="lnm" #lnm>
+                          </mat-form-field>
+                  </mat-grid-tile>         
+
+                  <mat-grid-tile>
+                          <mat-form-field class="Form-Group" >
+                                  <input matInput placeholder="Enter Your Ph.No" formControlName="phno" #phno>
+                                  <div *ngIf="userForm1.controls['phno'].hasError('pattern')" class="alert alert-danger" >
+                                      please Enter 10 digits....
+                              </div>
+                          </mat-form-field> 
+                  </mat-grid-tile>  
+
+                  <mat-grid-tile>
+                          <mat-form-field class="Form-Group">
+                                  <input matInput placeholder="Enter Your E-mail Address" formControlName="email" #email>
+                          </mat-form-field>
+                  </mat-grid-tile> 
+
+                  <mat-grid-tile>                                          
+                          <mat-form-field class="Form-Group" >
+                                  <input matInput type="password"  placeholder="Enter Your Password" formControlName="pass" #pass>
+                          </mat-form-field>                                      
+                  </mat-grid-tile>
+
+                  <mat-grid-tile>
+                          <mat-form-field class="Form-Group" >
+                                  <input matInput type="password" placeholder="Conform Your Password" formControlName="cpass" #cpass>
+                          </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile class="Form-Group">
+                          <button mat-raised-button class="btn btn-primary" type="submit">Register</button>
+                  </mat-grid-tile>
+
+          </mat-grid-list>
+
+        </form>
+</div>

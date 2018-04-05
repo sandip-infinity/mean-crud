@@ -1,0 +1,55 @@
+<body style="margin-top:50px;margin-left:50px;margin-right:50px">
+  <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+  
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>First Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+  
+     <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+    </ng-container>
+  
+     <ng-container matColumnDef="createdDate">
+      <mat-header-cell *matHeaderCellDef> Created Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.createdDate}} </mat-cell>
+    </ng-container>
+  
+     <ng-container matColumnDef="updatedDate">
+      <mat-header-cell *matHeaderCellDef> Updated Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.updatedDate}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-icon-button color="primary" (click)="add()"><mat-icon>add</mat-icon></button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+          <mat-icon color="primary" (click)="edit(element)">edit</mat-icon>
+          <mat-icon color="accent" (click)="delete(element)">delete</mat-icon>
+          <mat-icon color="primary" (click)="view(element)">visibility</mat-icon>
+         </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  </div>
+  </body>
