@@ -27,7 +27,8 @@ var userSchema = Schema({
 	password:String,
 	createdDate:String,
 	updatedDate:String,
-	status:String
+	status:String,
+	cpassword:String
 });
 var totalcount=0;
 var Users = mongoose.model('usersData',userSchema,'User');
@@ -98,13 +99,28 @@ app.get('/user/get/:pageIndex/:pageSize',function(req,res){
 
 app.post("/user/login",function(req,res){
     console.log("login : ",req.body);
-    Users.find({$or:[{phone:req.body.phno},{password:req.body.pass}]}, function(err, data) { 
+    Users.find({$or:[{phone:req.body.phno},{password:req.body.password}]}, function(err, data) { 
 		if(data){
 		console.log(data); 
 		res.send(data);}
     });
 });
 
+app.post("/user/signup",function(req,res){
+
+	var item={
+		firstname:req.body.firstname,
+		lastname:req.body.lastname,
+		phone:req.body.phone,
+		email:req.body.email,
+		password:req.body.password,
+		cpassword:req.body.cpassword
+	}
+	var data= new Users(item);
+    data.save();
+    console.log("Data inserted");
+
+});
 
 //add
 app.post('/user/add',function(req,res){
@@ -122,9 +138,10 @@ app.post('/user/add',function(req,res){
 		if(data){
 		//console.log(data); 
 		new Users({
-			'id':data.length+1,'firstname':req.body[0].firstname,'lastname':req.body[0].lastname,'email':req.body[0].email,
-			 'phone':req.body[0].phone,'password':req.body[0].password,'createdDate':today,'updatedDate':'',
-			 'status':'active'
+			'id':data.length+1,
+			'firstname':req.body[0].firstname,'lastname':req.body[0].lastname,
+			'email':req.body[0].email,'phone':req.body[0].phone,'password':req.body[0].password,
+			'createdDate':today,'updatedDate':'', 'status':'active'
 			}).save(function(err, doc){
 				if(err) res.send({'validation': 'Something missing... or not doing in proper way', 'status': 'false'});
 				else res.send({'validation': 'Successfully inserted..', 'status': 'true'});
