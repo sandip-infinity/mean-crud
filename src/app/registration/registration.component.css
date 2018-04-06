@@ -1,57 +1,54 @@
-h2{
-    color: rgb(16, 172, 199);
-    text-align: center;
-}
-* {
-    box-sizing: border-box;
-}
-label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-}
-.container {
-    margin-left: 15%;
-    margin-right: 15%;
-    height: 60%;
-    width: 70%;
+/* .container {
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 70%;
+    width: 50%;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
 }
 
-input{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
- button{
-    background-color: #64dbdd;
-}
 header{
     align-items: center;
     padding: 2px;
-    background-color: rgb(16, 172, 199);
+    background-color: rgb(40, 95, 245);
 }
+
 img{
     float: left;
     background: #555;
     width: 8%;
     height: 8%; 
 }
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+
+.example-container {
+    display: flex;
+    flex-direction: column;
   }
   
-  .example-full-width {
+  .example-container > * {
+    width: 60%;
+  }
+  button{
+    display: flex;
+    justify-content: space-around;
+    color: rgb(48, 68, 241);
+} */
+
+
+
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+  }
+  .signin-content {
+    padding: 60px 1rem;
+  }
+  .full-width-input {
     width: 100%;
   }
-
-
-
+  p{
+      background-color:  rgb(91, 12, 196);
+      color: snow;
+  }

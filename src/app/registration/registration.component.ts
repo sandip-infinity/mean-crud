@@ -23,12 +23,12 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
     this.userForm1=this._formBuilder.group({
     
-      fnm:["",[Validators.required]],
-      lnm: [""],
-      phno:[null,[Validators.required, Validators.pattern('^[1-9][0-9]{9}$')]],
+      firstname:["",[Validators.required]],
+      lastname: [""],
+      phone:[null,[Validators.required, Validators.pattern('^[1-9][0-9]{9}$')]],
       email:["",[Validators.required]],
-      pass:["",[Validators.required]],
-      cpass:["",[Validators.required]]       
+      password:["",[Validators.required]],
+      cpassword:["",[Validators.required]]       
     })
   }
   onSubmit(){

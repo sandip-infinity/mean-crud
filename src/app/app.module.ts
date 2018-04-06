@@ -20,7 +20,7 @@ import { DialogDataExampleDialogComponent } from './dialog-data-example-dialog/d
 import { RouterModule, Routes } from '@angular/router';
 
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSortModule} from '@angular/material/sort';
+import {MatSortModule} from '@angular/material';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
@@ -33,6 +33,7 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { DeleteComponent } from './delete/delete.component';
 import { RegistrationComponent } from './registration/registration.component';
+
 @NgModule({
   declarations: [
     AppComponent,
