@@ -1,4 +1,6 @@
 <body style="margin-top:50px;margin-left:50px;margin-right:50px">
+  <button mat-fab class="abc" (click)="add()"><i class="material-icons">&#xE147;</i></button>
+  
   <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort>
   
@@ -39,7 +41,7 @@
   
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Actions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button mat-icon-button color="primary" (click)="add()"><mat-icon>add</mat-icon></button>
+          <!-- <button mat-icon-button color="primary" (click)="add()"><mat-icon>add</mat-icon></button> -->
       </mat-header-cell>
       <mat-cell *matCellDef="let element"> 
           <mat-icon color="primary" (click)="edit(element)">edit</mat-icon>

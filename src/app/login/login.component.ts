@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     console.log(this.userForm.value);
     
-    this.http.post("http://localhost:9890/user/login",this.userForm.value).subscribe(result => {
+    this.http.post("http://localhost:4001/user/login",this.userForm.value).subscribe(result => {
       console.log("Valid User");
     
       this.route.navigateByUrl('home');

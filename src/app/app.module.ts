@@ -20,7 +20,7 @@ import { DialogDataExampleDialogComponent } from './dialog-data-example-dialog/d
 import { RouterModule, Routes } from '@angular/router';
 
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSortModule} from '@angular/material';
+import {MatSortModule,MatTabsModule} from '@angular/material';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
@@ -50,7 +50,7 @@ import { RegistrationComponent } from './registration/registration.component';
   BrowserModule,HttpClientModule,MatIconModule,MatTableModule,MatPaginatorModule,
     NoopAnimationsModule,MatDialogModule,MatFormFieldModule,MatInputModule,
     MatButtonModule,FormsModule,ReactiveFormsModule,MatGridListModule,MatToolbarModule,
-    MatCardModule,MatSortModule,MatProgressSpinnerModule,BrowserAnimationsModule,
+    MatCardModule,MatSortModule,MatProgressSpinnerModule,BrowserAnimationsModule,MatTabsModule,
     RouterModule.forRoot([
       
       {path:"home",component:HomeComponent, children: [
