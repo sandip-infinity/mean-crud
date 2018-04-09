@@ -45,6 +45,8 @@ export class UserComponent implements OnInit {
   ngOnInit() {
      this.paginator.pageSize=3;
     this.loadData(this.paginator);
+
+    
     this.formCtrlSub = this.firstNameControl.valueChanges
     .debounceTime(1500)
     .subscribe(newValue => {this.firstName = newValue

@@ -1,19 +1,26 @@
 <body style="margin-top:50px;margin-left:50px;margin-right:50px">
-<button mat-raised-button color="primary" routerLink="user" routerLinkActive="c1">Userj</button>
+    
+<!-- <button mat-raised-button color="primary" routerLink="user" routerLinkActive="c1">Userj</button>
 &nbsp;&nbsp;&nbsp;
 <button mat-raised-button color="primary" routerLink="profile" routerLinkActive="c1">Profile</button>
 <div>
     <router-outlet></router-outlet>
-</div>
+</div> -->
 
-<!-- 
-<nav mat-tab-nav-bar>
-        <a mat-tab-link
-           *ngFor="let link of navLinks"
-           [routerLink]="user"
-           routerLinkActive="c1">
-        </a>
-      </nav>
+        <nav mat-tab-nav-bar style="width:50%">
+                
+                        <a mat-tab-link
+                        *ngFor="let tabLink of tabLinks; let i = index"
+                        [routerLink]="tabLink.link"
+                        routerLinkActive="active"
+                        [active]="active"
+                        >
+                        {{tabLink.label}}
+                        </a>
+                  
+        </nav>
+
+
       
-      <router-outlet></router-outlet> -->
+      <router-outlet></router-outlet>
 </body>

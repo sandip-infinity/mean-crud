@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  tabLinks = [
+    {label: 'User', link: 'User'},
+    {label: 'Profile', link: 'Profile'}
+  ];
+
   ngOnInit() {
   }
 }
