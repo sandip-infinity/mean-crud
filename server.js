@@ -108,17 +108,49 @@ app.post("/user/login",function(req,res){
 
 app.post("/user/signup",function(req,res){
 
-	var item={
-		firstname:req.body.firstname,
-		lastname:req.body.lastname,
-		phone:req.body.phone,
-		email:req.body.email,
-		password:req.body.password,
-		cpassword:req.body.cpassword
-	}
-	var data= new Users(item);
-    data.save();
-    console.log("Data inserted");
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	if(dd<10){ dd='0'+dd;} 
+	if(mm<10){ mm='0'+mm;} 
+	var today = dd+'/'+mm+'/'+yyyy;
+	console.log("Date ",today);
+
+	Users.find({}, function(err, data) { 
+		if(data){
+		//console.log(data); 
+		new Users({
+			'id':data.length+1,
+			'firstname':req.body[0].firstname,'lastname':req.body[0].lastname,
+			'email':req.body[0].email,'phone':req.body[0].phone,'password':req.body[0].password,
+			'cpassword':req.body[0].cpassword,
+			'createdDate':today,'updatedDate':'', 'status':'active'
+			}).save(function(err, doc){
+				if(err) res.send({'validation': 'Something missing... or not doing in proper way', 'status': 'false'});
+				else res.send({'validation': 'Successfully inserted..', 'status': 'true'});
+			});
+		}
+});
+
+	// var item={
+	// 	id:req.body[0].length+1,
+	// 	firstname:req.body.firstname,
+	// 	lastname:req.body.lastname,
+	// 	phone:req.body.phone,
+	// 	email:req.body.email,
+	// 	password:req.body.password,
+	// 	cpassword:req.body.cpassword,
+	// 	createdDate:today,
+	// 	updatedDate:'',
+	// 	status:'Active'
+	// }
+	// var data= new Users(item);
+    // data.save(function(err, doc){
+	// 	if(err) res.send({'validation': 'Something missing... or not doing in proper way', 'status': 'false'});
+	// 	else res.send({'validation': 'Successfully inserted..', 'status': 'true'});
+	// });
+    // console.log("Data inserted");
 
 });
 

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   
   ngOnInit(){
     this.userForm=this._formBuilder.group({
-      phno:["",[Validators.required]],
+      phone:["",[Validators.required]],
       password: ["",[Validators.required]]      
     });
   }

@@ -14,6 +14,7 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 export class RegistrationComponent implements OnInit {
 
   userForm1:FormGroup;
+  password = 'password';
 
   constructor( private _formBuilder: FormBuilder,
     // public thisDialogref: MatDialogRef<AppComponent>  ,
@@ -22,13 +23,16 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.userForm1=this._formBuilder.group({
-    
+      id:[""],
       firstname:["",[Validators.required]],
       lastname: [""],
       phone:[null,[Validators.required, Validators.pattern('^[1-9][0-9]{9}$')]],
-      email:["",[Validators.required]],
+      email:[null,[Validators.required,Validators.email]],
       password:["",[Validators.required]],
-      cpassword:["",[Validators.required]]       
+      cpassword:["",[Validators.required]],
+      createdDate:[""],
+      updatedDate:[""],
+      status:[""]
     })
   }
   onSubmit(){
