@@ -27,11 +27,8 @@ export class DataControlService {
 //    console.log("update data",post);
     return this.http.put(this.url+'/update/'+id,post);
   }
-<<<<<<< HEAD
 
   public search(pageIndex,pageSize,filterValue):any{
     return this.http.get(this.url+'/search/'+pageIndex+'/'+pageSize+'/'+filterValue);
    }
-=======
->>>>>>> mangesh-dev
 }
