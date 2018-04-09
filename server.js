@@ -37,11 +37,15 @@ Users.find({}, function(err, data) {
 		console.log(data, data.length); 
 	});*/
 
-app.get('/user/get/:pageIndex/:pageSize',function(req,res){
-	console.log("PageIndex :",req.params.pageIndex,"PageSize :",req.params.pageSize);
+app.get('/user/get/:pageIndex/:pageSize/:sortActive/:sortDirection',function(req,res){
+	console.log("get data PageIndex :",req.params.pageIndex,"PageSize :"
+	,req.params.pageSize," sortActive :",req.params.sortActive," sortDirection :",
+	req.params.sortDirection);
+
 	var skip=((parseInt(req.params.pageIndex)+1)-1)*parseInt(req.params.pageSize);
 	var size=parseInt(req.params.pageSize);
 	pageNo=parseInt(req.params.pageIndex)+1;
+	
 	Users.count({}, function(err, count) { 
 		if(err){
 			totalcount=0;
@@ -52,9 +56,17 @@ app.get('/user/get/:pageIndex/:pageSize',function(req,res){
 		}
 	});
 	var query=Users.find();
-	query.skip(skip);
-	console.log("size",size)
-	query.limit(size);
+	if(req.params.sortActive=='undefined' || req.params.sortDirection=='undefined'){
+		query.skip(skip);
+		query.limit(size);
+	}else{
+		var col=req.params.sortActive;
+		var dir=(req.params.sortDirection=='asc')?1:-1;
+		query.sort({[col]:dir})
+		query.skip(skip);
+		query.limit(size);
+	}
+	
 	query.exec(function(err, docs){
 		console.log("resultbvjnvn",docs);
 		var result = {

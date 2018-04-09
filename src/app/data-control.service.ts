@@ -7,9 +7,10 @@ export class DataControlService {
   url:string = 'http://localhost:4001/user';
   constructor(private http:HttpClient) { }
   
-  getData(pageIndex,pageSize){
+  getData(pageIndex,pageSize,sortActive,sortDirection){
     console.log("bdhascbzx",pageSize)
-    return this.http.get(this.url+'/get/'+pageIndex+'/'+pageSize);
+    return this.http.get(this.url+'/get/'+pageIndex+'/'+pageSize+'/'+
+      sortActive+'/'+sortDirection);
   }
 
   saveData(post){

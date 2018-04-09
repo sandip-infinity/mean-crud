@@ -6,7 +6,7 @@
               <input type=text matInput [value]="firstName" placeholder="filter" [formControl]="firstNameControl">
           </mat-form-field>
       </div> 
-  <mat-table #table [dataSource]="dataSource" matSort>
+  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
   
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
@@ -34,22 +34,17 @@
     </ng-container>
   
      <ng-container matColumnDef="createdDate">
-      <mat-header-cell *matHeaderCellDef> Created Date </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.createdDate}} </mat-cell>
     </ng-container>
   
      <ng-container matColumnDef="updatedDate">
-      <mat-header-cell *matHeaderCellDef> Updated Date </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Updated Date </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.updatedDate}} </mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Actions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<<<<<<< HEAD
-          <button mat-icon-button color="primary" (click)="add()"><mat-icon>add</mat-icon></button>
-=======
-          <!-- <button mat-icon-button color="primary" (click)="add()"><mat-icon>add</mat-icon></button> -->
->>>>>>> mangesh-dev
       </mat-header-cell>
       <mat-cell *matCellDef="let element"> 
           <mat-icon color="primary" (click)="edit(element)">edit</mat-icon>
@@ -69,6 +64,5 @@
 (page)="loadData($event)"
 [showFirstLastButtons]="true">
 </mat-paginator>
-
   </div>
   </body>

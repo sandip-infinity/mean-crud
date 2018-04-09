@@ -44,7 +44,8 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
      this.paginator.pageSize=3;
-    this.loadData(this.paginator);
+     let sort={sortActive:" ",sortDirection:" "}
+    this.loadData(this.paginator,sort);
 
     
     this.formCtrlSub = this.firstNameControl.valueChanges
@@ -64,9 +65,10 @@ export class UserComponent implements OnInit {
 
   }//ngoninit
 
-  loadData(event:PageEvent){
+  loadData(event:PageEvent,sortData:any){
      console.log("paginator :",event.pageSize);
-    this.service.getData(event.pageIndex,event.pageSize).subscribe(response=>{
+     console.log("sort :",sortData);
+    this.service.getData(event.pageIndex,event.pageSize,sortData.active,sortData.direction).subscribe(response=>{
       var res=response['result'];
       console.log("server get all users data :",res);
       this.dataSource=new MatTableDataSource(res['result'] as Array<any>);
@@ -80,6 +82,31 @@ export class UserComponent implements OnInit {
     })
   }
 
+  sortData(sort: MatSort){
+    const data = this.dataSource.data;
+    console.log("fhc",this.sort.direction);
+    if (!this.sort.active || this.sort.direction =="") {
+      console.log("ghfjmbkm, ",this.data1);
+      let sort={sortActive:" ",sortDirection:" "}
+      this.loadData(this.paginator,sort)
+     // this.dataSource.data = this.data1;
+      return;
+    }
+
+      this.loadData(this.paginator,this.sort)
+
+      // this.http.get('http://localhost:4000/sortData/'+this.paginator.pageIndex+'/'+this.paginator.pageSize+'/'+this.sort.active+'/'+this.sort.direction).subscribe(
+      //   data=>{
+      //     console.log("on data load server result :",data);
+      //     this.dataSource = new MatTableDataSource(data['data'] as Array<any>);
+      //    // this.dataObject=data['data'] as Array<any>; 
+      //     this.pageSize=data['pageSize'];
+      //     this.pageIndex=data['pageIndex'];
+      //     this.length=data['length'];
+      //     this.data1=this.dataSource.data;
+      //   });
+     }
+
   add(){
     let dialogRef= this.dialog.open( DialogDataExampleDialogComponent,{
       height:'550px',
@@ -91,7 +118,7 @@ export class UserComponent implements OnInit {
          console.log("server add result",result)
          if(result['status']=='true'){
           console.log("record inserted successfully. ");
-          this.loadData(this.paginator);
+          this.loadData(this.paginator,this.sort);
          }
          else{
           console.log("insertion failed.");
@@ -115,7 +142,7 @@ export class UserComponent implements OnInit {
            console.log("delete : server result",res);
            if(res['status']=='true'){
              console.log(res['validation']);
-             this.loadData(this.paginator);
+             this.loadData(this.paginator,this.sort);
            }else{
             console.log(res['validation']);
            }
@@ -140,7 +167,7 @@ export class UserComponent implements OnInit {
       this.service.updateData(res,this._id).subscribe((response)=>{
         console.log("update : server result",response);
         if(response['status']=='true'){
-          this.loadData(this.paginator);
+          this.loadData(this.paginator,this.sort);
            // this.dataSource.data[this.index1]=res;
         }
         else{
