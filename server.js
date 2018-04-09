@@ -27,7 +27,8 @@ var userSchema = Schema({
 	password:String,
 	createdDate:String,
 	updatedDate:String,
-	status:String
+	status:String,
+	cpassword:String
 });
 var totalcount=0;
 var Users = mongoose.model('usersData',userSchema,'User');
@@ -113,13 +114,64 @@ app.get('/user/search/:pageIndex/:pageSize/:filterValue',function(req,res){
 
 app.post("/user/login",function(req,res){
     console.log("login : ",req.body);
-    Users.find({$or:[{phone:req.body.phno},{password:req.body.pass}]}, function(err, data) { 
+    Users.find({$or:[{phone:req.body.phone},{password:req.body.password}]}, function(err, data) { 
 		if(data){
 		console.log(data); 
 		res.send(data);}
     });
 });
 
+app.post("/user/signup",function(req,res){
+
+
+
+    var today = new Date();
+
+    var dd = today.getDate();
+
+    var mm = today.getMonth()+1; //January is 0!
+
+    var yyyy = today.getFullYear();
+
+    if(dd<10){ dd='0'+dd;} 
+
+    if(mm<10){ mm='0'+mm;} 
+
+    var today = dd+'/'+mm+'/'+yyyy;
+
+    console.log("Date ",today);
+
+
+
+    var item={
+
+        firstname:req.body.firstname,
+
+        lastname:req.body.lastname,
+
+        phone:req.body.phone,
+
+        email:req.body.email,
+
+        password:req.body.password,
+
+        cpassword:req.body.cpassword,
+
+        createdDate:this.today,
+
+        
+
+    }
+
+    var data= new Users(item);
+
+data.save();
+
+console.log("Data inserted");
+
+
+
+});
 
 //add
 app.post('/user/add',function(req,res){
@@ -180,39 +232,8 @@ app.put('/user/update/:userId', function(req, res){
 	});
  });
 
-app.post("/user/register",function(req,res){
-	console.log(req.body);
-	var today = new Date();
-	var dd = today.getDate();
-	var mm = today.getMonth()+1; //January is 0!
-	var yyyy = today.getFullYear();
-	if(dd<10){ dd='0'+dd;} 
-	if(mm<10){ mm='0'+mm;} 
-	var today = dd+'/'+mm+'/'+yyyy;
 
-	mc.connect("mongodb://127.0.0.1:27017",function(err,conn){
-		var dbc=conn.db('userDetails');
-		dbc.collection('User').find().count()
-		.then(function(numItems) {
-		console.log("count :",numItems);
-		var myobj={'id':numItems+1,'firstname':req.body.fnm,'lastname':req.body.lnm,'email':req.body.email,
-				'phone':req.body.phno,'password':req.body.cpass,'createdDate':today,'updatedDate':'',
-				'status':'active'};
-		console.log("myobj :",myobj);
-		dbc.collection("User").insertOne(myobj, function(err, response) {
-			if(err) throw err;
-			if(response){
-				console.log("record inserted");
-				dbc.collection("userDetails").find({'id':numItems+1}).toArray(function(err,data){
-				   if (err) throw err;
-				   console.log("result :",data);
-				   res.send({'status':'success','data':data});
-				});
-			}});
-			
-		});
-	});//mongo
 
+app.listen(4001,function(){
+    console.log("Server is running on 4001");
 });
-
-app.listen(4001);
