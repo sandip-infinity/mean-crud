@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router'
 import 'rxjs/add/operator/map';
 import { Headers, Http, RequestOptions } from '@angular/http';
+import { EqualTextValidator } from "angular2-text-equality-validator";
 
 @Component({
   selector: 'app-registration',
@@ -23,18 +24,19 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.userForm1=this._formBuilder.group({
-      id:[""],
+      
       firstname:["",[Validators.required]],
       lastname: [""],
       phone:[null,[Validators.required, Validators.pattern('^[1-9][0-9]{9}$')]],
       email:[null,[Validators.required,Validators.email]],
-      password:["",[Validators.required]],
+      password:["",[Validators.compose([Validators.required])]],
       cpassword:["",[Validators.required]],
       createdDate:[""],
       updatedDate:[""],
       status:[""]
     })
   }
+
   onSubmit(){
     console.log(this.userForm1.value);
     this.http.post("http://localhost:4001/user/signup",this.userForm1.value).subscribe(result => {

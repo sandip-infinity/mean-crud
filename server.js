@@ -107,7 +107,7 @@ app.post("/user/login",function(req,res){
 });
 
 app.post("/user/signup",function(req,res){
-
+console.log(req.body);
 	var today = new Date();
 	var dd = today.getDate();
 	var mm = today.getMonth()+1; //January is 0!
@@ -117,24 +117,8 @@ app.post("/user/signup",function(req,res){
 	var today = dd+'/'+mm+'/'+yyyy;
 	console.log("Date ",today);
 
-	Users.find({}, function(err, data) { 
-		if(data){
-		//console.log(data); 
-		new Users({
-			'id':data.length+1,
-			'firstname':req.body[0].firstname,'lastname':req.body[0].lastname,
-			'email':req.body[0].email,'phone':req.body[0].phone,'password':req.body[0].password,
-			'cpassword':req.body[0].cpassword,
-			'createdDate':today,'updatedDate':'', 'status':'active'
-			}).save(function(err, doc){
-				if(err) res.send({'validation': 'Something missing... or not doing in proper way', 'status': 'false'});
-				else res.send({'validation': 'Successfully inserted..', 'status': 'true'});
-			});
-		}
-});
-
 	// var item={
-	// 	id:req.body[0].length+1,
+	// 	id:
 	// 	firstname:req.body.firstname,
 	// 	lastname:req.body.lastname,
 	// 	phone:req.body.phone,
@@ -151,6 +135,27 @@ app.post("/user/signup",function(req,res){
 	// 	else res.send({'validation': 'Successfully inserted..', 'status': 'true'});
 	// });
     // console.log("Data inserted");
+
+	Users.find({}, function(err, data) { 
+		if(data){
+		
+		new Users({
+			'id':data.length+1,
+			'firstname':req.body.firstname,
+			'lastname':req.body.lastname,
+			'email':req.body.email,
+			'phone':req.body.phone,
+			'password':req.body.password,
+			'createdDate':today,
+			'cpassword':req.body.cpassword,
+			'updatedDate':'', 
+			'status':'active'
+			}).save(function(err, doc){
+				if(err) res.send({'validation': 'Something missing', 'status': 'false'});
+				else res.send({'validation': 'Successfully inserted', 'status': 'true'});
+			});
+		}
+});
 
 });
 

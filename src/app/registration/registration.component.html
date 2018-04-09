@@ -23,10 +23,11 @@
                   </span>
               </mat-input-container>
               <mat-input-container class="full-width-input">
-                <input matInput type="password" placeholder="Password"   formControlName="password" required>
+                <input matInput type="password" placeholder="Password"   formControlName="password" required validateEqualTo="cpassword">
               </mat-input-container>
               <mat-input-container class="full-width-input">
                 <input matInput type="password" placeholder="Confirm Password"   formControlName="cpassword" required>
+                <div *ngIf="userForm1.get('password').hasError('validateEqual')" class="alert alert-danger">Passwords don't match</div>
               </mat-input-container>
               <button mat-raised-button color="primary" type="submit">Register</button>
               
