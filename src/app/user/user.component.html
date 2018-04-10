@@ -1,11 +1,9 @@
 <body style="margin-top:50px;margin-left:50px;margin-right:50px">
-    
+    <mat-form-field>
+        <input type=text matInput [value]="firstName" placeholder="filter" [formControl]="firstNameControl">
+    </mat-form-field>  
+    <button mat-fab style="margin-left:90%" color="primary" (click)="add()"><mat-icon>add</mat-icon></button>
   <div class="example-container mat-elevation-z8">
-      <div class="form" >
-          <mat-form-field>
-              <input type=text matInput [value]="firstName" placeholder="filter" [formControl]="firstNameControl">
-          </mat-form-field>
-      </div> 
   <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
   
     <ng-container matColumnDef="id">
@@ -44,8 +42,8 @@
     </ng-container>
   
     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef> Actions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Actions
+    </mat-header-cell>
       <mat-cell *matCellDef="let element"> 
           <mat-icon color="primary" (click)="edit(element)">edit</mat-icon>
           <mat-icon color="accent" (click)="delete(element)">delete</mat-icon>

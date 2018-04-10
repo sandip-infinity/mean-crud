@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
   pageSizeOptions = [3,5,10,12];
   _id;data1;
 
-  firstName= "";
+  firstName="";
   firstNameControl = new FormControl();
   formCtrlSub: Subscription;
 
@@ -43,32 +43,36 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.paginator.pageSize=3;
-     let sort={sortActive:" ",sortDirection:" "}
-    this.loadData(this.paginator,sort);
+    this.paginator.pageSize=3;
+    this.sort.active=" ";
+      this.sort.direction="asc";
+   this.loadData(this.paginator);
 
-    
-    this.formCtrlSub = this.firstNameControl.valueChanges
-    .debounceTime(1500)
-    .subscribe(newValue => {this.firstName = newValue
-      if(this.firstName==""){
-        console.log("filter value :",this.firstName);
-        this.dataSource=new MatTableDataSource(this.data1 as Array<any>);
-      }else{
-        console.log("filter value :",this.firstName);
-        this.service.search(this.paginator.pageIndex,this.paginator.pageSize,this.firstName).subscribe((res)=>{
-        console.log('filter result :',res);
-        this.dataSource=new MatTableDataSource(res as Array<any>);
-        });
-      }
-    });
+   
+   this.formCtrlSub = this.firstNameControl.valueChanges
+   .debounceTime(1500)
+   .subscribe(newValue => {this.firstName = newValue
+     if(this.firstName==""){
+       console.log("filter value :",this.firstName);
+       this.dataSource=new MatTableDataSource(this.data1 as Array<any>);
+     }else{
+       console.log("filter value :",this.firstName);
+       this.service.search(this.paginator.pageIndex,this.paginator.pageSize,this.firstName).subscribe((res)=>{
+       console.log('filter result :',res);
+       this.dataSource=new MatTableDataSource(res as Array<any>);
+       });
+     }
+   });
 
   }//ngoninit
 
-  loadData(event:PageEvent,sortData:any){
-     console.log("paginator :",event.pageSize);
-     console.log("sort :",sortData);
-    this.service.getData(event.pageIndex,event.pageSize,sortData.active,sortData.direction).subscribe(response=>{
+  //onPageChange
+
+  loadData(event:PageEvent){
+    // console.log("paginator :",event.pageSize);
+    
+     console.log("filter :",this.firstName);
+    this.service.getData(event.pageIndex,event.pageSize,this.firstName,this.sort.active,this.sort.direction).subscribe(response=>{
       var res=response['result'];
       console.log("server get all users data :",res);
       this.dataSource=new MatTableDataSource(res['result'] as Array<any>);
@@ -87,13 +91,15 @@ export class UserComponent implements OnInit {
     console.log("fhc",this.sort.direction);
     if (!this.sort.active || this.sort.direction =="") {
       console.log("ghfjmbkm, ",this.data1);
-      let sort={sortActive:" ",sortDirection:" "}
-      this.loadData(this.paginator,sort)
+      this.sort.active=" ";
+      this.sort.direction="asc";
+      //let sort={sortActive:" ",sortDirection:" "}
+      this.loadData(this.paginator)
      // this.dataSource.data = this.data1;
       return;
     }
 
-      this.loadData(this.paginator,this.sort)
+      this.loadData(this.paginator)
 
       // this.http.get('http://localhost:4000/sortData/'+this.paginator.pageIndex+'/'+this.paginator.pageSize+'/'+this.sort.active+'/'+this.sort.direction).subscribe(
       //   data=>{
@@ -118,7 +124,7 @@ export class UserComponent implements OnInit {
          console.log("server add result",result)
          if(result['status']=='true'){
           console.log("record inserted successfully. ");
-          this.loadData(this.paginator,this.sort);
+          this.loadData(this.paginator);
          }
          else{
           console.log("insertion failed.");
@@ -142,7 +148,7 @@ export class UserComponent implements OnInit {
            console.log("delete : server result",res);
            if(res['status']=='true'){
              console.log(res['validation']);
-             this.loadData(this.paginator,this.sort);
+             this.loadData(this.paginator);
            }else{
             console.log(res['validation']);
            }
@@ -167,7 +173,7 @@ export class UserComponent implements OnInit {
       this.service.updateData(res,this._id).subscribe((response)=>{
         console.log("update : server result",response);
         if(response['status']=='true'){
-          this.loadData(this.paginator,this.sort);
+          this.loadData(this.paginator);
            // this.dataSource.data[this.index1]=res;
         }
         else{

@@ -34,7 +34,7 @@ import { Router } from '@angular/router'
 
 @Injectable()
 export class AppComponent implements OnInit{
- 
+ profile:any;
   constructor(private router: Router) { }
 
   ngOnInit() {

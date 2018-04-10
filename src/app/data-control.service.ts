@@ -7,8 +7,9 @@ export class DataControlService {
   url:string = 'http://localhost:4001/user';
   constructor(private http:HttpClient) { }
   
-  getData(pageIndex,pageSize,sortActive,sortDirection){
-    console.log("bdhascbzx",pageSize)
+  getData(pageIndex,pageSize,filtervalue,sortActive,sortDirection){
+    console.log("bdhascbzx",pageSize,    this.url+'/get/'+pageIndex+'/'+pageSize+'/'+filtervalue+'/'+
+    sortActive+'/'+sortDirection)
     return this.http.get(this.url+'/get/'+pageIndex+'/'+pageSize+'/'+
       sortActive+'/'+sortDirection);
   }

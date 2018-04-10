@@ -39,13 +39,14 @@ Users.find({}, function(err, data) {
 
 app.get('/user/get/:pageIndex/:pageSize/:sortActive/:sortDirection',function(req,res){
 	console.log("get data PageIndex :",req.params.pageIndex,"PageSize :"
-	,req.params.pageSize," sortActive :",req.params.sortActive," sortDirection :",
+	,req.params.pageSize," filtervalue :",req.params.filterValue," sortActive :",req.params.sortActive," sortDirection :",
 	req.params.sortDirection);
 
 	var skip=((parseInt(req.params.pageIndex)+1)-1)*parseInt(req.params.pageSize);
 	var size=parseInt(req.params.pageSize);
 	pageNo=parseInt(req.params.pageIndex)+1;
 	
+	var query;
 	Users.count({}, function(err, count) { 
 		if(err){
 			totalcount=0;
@@ -55,28 +56,28 @@ app.get('/user/get/:pageIndex/:pageSize/:sortActive/:sortDirection',function(req
 			totalcount=count;
 		}
 	});
-	var query=Users.find();
-	if(req.params.sortActive=='undefined' || req.params.sortDirection=='undefined'){
-		query.skip(skip);
-		query.limit(size);
-	}else{
-		var col=req.params.sortActive;
-		var dir=(req.params.sortDirection=='asc')?1:-1;
-		query.sort({[col]:dir})
-		query.skip(skip);
-		query.limit(size);
-	}
-	
-	query.exec(function(err, docs){
-		console.log("resultbvjnvn",docs);
-		var result = {
-			"totalRecords" : totalcount,
-			"nextPage":pageNo,
-			"result": docs
-		};
-		res.send({'validation': 'result get successfully', 'status': 'true',
-		'pageSize':size,'result':result});
-	});
+	query=Users.find();
+			if(req.params.sortActive==' ' || req.params.sortDirection==' '){
+				query.skip(skip);
+				query.limit(size);
+				}else{
+					var col=req.params.sortActive;
+					var dir=(req.params.sortDirection=='asc')?1:-1;
+					query.sort({[col]:dir})
+					query.skip(skip);
+					query.limit(size);
+				}
+				query.exec(function(err, docs){
+					console.log("resultbvjnvn",docs);
+					var result2 = {
+						"totalRecords" : totalcount,
+						"nextPage":pageNo,
+						"result": docs
+					};
+					res.send({'validation': 'result get successfully', 'status': 'true',
+					'pageSize':size,'result':result2});
+				});
+			
 });
 
 //filter
@@ -85,18 +86,6 @@ app.get('/user/search/:pageIndex/:pageSize/:filterValue',function(req,res){
 	var param=req.params.filterValue;
 	console.log("param :",param);
 	var result=[];
-	/*
-	Users.find({$or: [
-    				{ 'firstname': param },
-    				{ 'lastname': param },
-				{ 'email': param },
-				{ 'phone': param },
-				{ 'createdDate': param },
-				{ 'updatedDate': param }
-  			]}, function(err, data) { 
-				console.log(data); 
-	});*/
-
 	Users.find( {}, function(err,docs){
  		if(!err){ console.log(docs[0].firstname,docs.length);
 			for(var i=0;i<docs.length;i++)
@@ -119,8 +108,6 @@ app.get('/user/search/:pageIndex/:pageSize/:filterValue',function(req,res){
 		console.log("result array :",result);
 		res.send(result);
 	});
-
-	
 });
 
 
