@@ -15,6 +15,9 @@
           <p>Please login to continue</p>
           <mat-input-container class="full-width-input">
             <input matInput placeholder=" Phone No." formControlName="phone" required>
+             <div *ngIf="userForm.controls['phone'].hasError('pattern')" class="alert alert-danger" >
+                    please Enter 10 digits....
+                </div>
             <!-- <mat-error *ngIf="isFieldInvalid('phno')"> 
               Please inform your phone no.
             </mat-error> -->

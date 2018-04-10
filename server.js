@@ -99,10 +99,13 @@ app.get('/user/get/:pageIndex/:pageSize',function(req,res){
 
 app.post("/user/login",function(req,res){
     console.log("login : ",req.body);
-    Users.find({phone:req.body.phone},{password:req.body.password}, function(err, data) { 
+    Users.find({$and:[{phone:req.body.phone},{password:req.body.password}]}, function(err, data) { 
 		if(data){
 		console.log(data); 
 		res.send(data);}
+		else{
+			throw err;
+		}
     });
 });
 
@@ -152,7 +155,7 @@ console.log(req.body);
 			'status':'active'
 			}).save(function(err, doc){
 				if(err) res.send({'validation': 'Something missing', 'status': 'false'});
-				else res.send({'validation': 'Successfully inserted', 'status': 'true'});
+				else res.send({'validation': 'Successfully inserted..', 'status': 'true'});
 			});
 		}
 });

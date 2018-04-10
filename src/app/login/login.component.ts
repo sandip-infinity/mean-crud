@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AppComponent } from './../app.component';
+import { Component, OnInit, Output, EventEmitter,ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { Router,ActivatedRoute } from '@angular/router'
@@ -12,10 +13,16 @@ export class LoginComponent implements OnInit {
 
   userForm:FormGroup;
 
+  // @Output() 
+  // onadd = new EventEmitter<any>(true);
+
  constructor( private _formBuilder: FormBuilder,
     // public thisDialogref: MatDialogRef<AppComponent>  ,
     private http:HttpClient,
-  private route:Router){}
+  private route:Router,
+public app:AppComponent ){}
+
+  
 
   
   ngOnInit(){
@@ -29,12 +36,15 @@ export class LoginComponent implements OnInit {
     console.log(this.userForm.value);
     
     this.http.post("http://localhost:4001/user/login",this.userForm.value).subscribe(result => {
-      console.log("Valid User");
+
+    console.log(result);
+    this.app.profiledata=result;
+    // this.onadd.emit(result);
     
+      console.log("Valid User");
       this.route.navigateByUrl('home');
      },(error)=>{
-       console.log("Invalid User");
-       
+       console.log("Invalid User");  
      });
 
   }

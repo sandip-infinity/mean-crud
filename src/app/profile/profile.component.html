@@ -1,0 +1,38 @@
+   <div class="signin-content">
+      <mat-card>
+        <mat-card-content>
+          <form>
+            <p>USER INFORMATION</p>
+            <mat-input-container class="full-width-input">
+                <input matInput  placeholder="ID"  >{{app.profiledata[0].id}}
+              </mat-input-container>
+            <mat-input-container class="full-width-input">
+              <input matInput placeholder=" First Name">{{app.profiledata[0].firstname}}
+            </mat-input-container>
+            <mat-input-container class="full-width-input">
+              <input matInput  placeholder="Last Name">{{app.profiledata[0].lastname}}
+            </mat-input-container>
+            <mat-input-container class="full-width-input">
+              <input matInput placeholder="Phone No.">{{app.profiledata[0].phone}}
+            </mat-input-container>
+            <mat-input-container class="full-width-input">
+              <input matInput  placeholder="E-mail">{{app.profiledata[0].email}}
+            </mat-input-container>
+            <mat-input-container class="full-width-input">
+              <input matInput type="password" placeholder="Password">{{app.profiledata[0].password}}
+            </mat-input-container>
+            <mat-input-container class="full-width-input">
+              <input matInput type="password" placeholder="Confirm Password">{{app.profiledata[0].cpassword}}
+            </mat-input-container>
+            <mat-input-container class="full-width-input">
+                <input matInput  placeholder="Created Date">{{app.profiledata[0].createdDate}}
+              </mat-input-container>
+              <mat-input-container class="full-width-input">
+                  <input matInput  placeholder="Updated Date">{{app.profiledata[0].updatedDate}}
+                </mat-input-container>
+            <button mat-raised-button (click)="ok()">OK</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+

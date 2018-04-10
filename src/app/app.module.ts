@@ -33,6 +33,7 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { DeleteComponent } from './delete/delete.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { RegistrationComponent } from './registration/registration.component';
     HomeComponent,
     UserComponent,
     DeleteComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileComponent
   ],
   imports: [
   BrowserModule,HttpClientModule,MatIconModule,MatTableModule,MatPaginatorModule,
@@ -56,6 +58,9 @@ import { RegistrationComponent } from './registration/registration.component';
       {path:"home",component:HomeComponent, children: [
         {
           path:"user",component:UserComponent
+        },
+        {
+          path:"profile",component:ProfileComponent
         }]},
       { path: 'register',  component: RegistrationComponent  },
       { path: 'login',  component: LoginComponent },
