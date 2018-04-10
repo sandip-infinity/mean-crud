@@ -99,7 +99,7 @@ app.get('/user/get/:pageIndex/:pageSize',function(req,res){
 
 app.post("/user/login",function(req,res){
     console.log("login : ",req.body);
-    Users.find({$or:[{phone:req.body.phone},{password:req.body.password}]}, function(err, data) { 
+    Users.find({phone:req.body.phone},{password:req.body.password}, function(err, data) { 
 		if(data){
 		console.log(data); 
 		res.send(data);}

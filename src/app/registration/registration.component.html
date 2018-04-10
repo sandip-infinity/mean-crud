@@ -17,19 +17,21 @@
                 </div>
               </mat-input-container>
               <mat-input-container class="full-width-input">
-                <input matInput  placeholder="E-mail"   formControlName="email" >
-                <span *ngIf="userForm1.hasError('email', 'email') && userForm1.get('email').touched" class="alert alert-danger">
-                    Please enter the correct email, this email not valid.
+                <input matInput  placeholder="E-mail"   formControlName="email"  required>
+                <span *ngIf="userForm1.hasError('email', 'email') && userForm1.get('email').touched" class="alert-danger">
+                    Please enter valid email contains '@','.' ...
                   </span>
               </mat-input-container>
               <mat-input-container class="full-width-input">
-                <input matInput type="password" placeholder="Password"   formControlName="password" required validateEqualTo="cpassword">
+                <input matInput type="password" placeholder="Password"   formControlName="password" required >
               </mat-input-container>
               <mat-input-container class="full-width-input">
                 <input matInput type="password" placeholder="Confirm Password"   formControlName="cpassword" required>
-                <div *ngIf="userForm1.get('password').hasError('validateEqual')" class="alert alert-danger">Passwords don't match</div>
+                <div  *ngIf="userForm1.controls['cpassword'].errors?.MatchPassword && userForm1.get('cpassword').touched " class="alert alert-danger">
+                    Password not match
+                </div>
               </mat-input-container>
-              <button mat-raised-button color="primary" type="submit">Register</button>
+              <button mat-raised-button [disabled]="!userForm1.valid" color="primary" type="submit">Register</button>
               
             </form>
           </mat-card-content>

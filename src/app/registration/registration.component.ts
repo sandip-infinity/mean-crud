@@ -6,6 +6,7 @@ import { Router } from '@angular/router'
 import 'rxjs/add/operator/map';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { EqualTextValidator } from "angular2-text-equality-validator";
+import { PasswordValidation } from './Passwordvalidation';
 
 @Component({
   selector: 'app-registration',
@@ -24,16 +25,18 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.userForm1=this._formBuilder.group({
-      
-      firstname:["",[Validators.required]],
+      id:[""],
+      firstname:[""],
       lastname: [""],
-      phone:[null,[Validators.required, Validators.pattern('^[1-9][0-9]{9}$')]],
+      phone:[null,[Validators.required, Validators.pattern('^[1-9][0-9]{9}$'),Validators.maxLength(10)]],
       email:[null,[Validators.required,Validators.email]],
       password:["",[Validators.compose([Validators.required])]],
       cpassword:["",[Validators.required]],
       createdDate:[""],
       updatedDate:[""],
       status:[""]
+    },{
+      validator: PasswordValidation.MatchPassword // your validation method
     })
   }
 
