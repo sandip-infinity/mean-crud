@@ -1,35 +1,58 @@
-<!-- <div class="container">
-  <header>
-    <div layout="row" >
-        <img src="https://cdn.onlinewebfonts.com/svg/img_464825.png">
-        <h1 style="color:white">Login Employee</h1>
-    </div>
-  </header>-->
-
- 
 
 <div class="signin-content">
     <mat-card>
+        
+        <div class="div-1">
+           <div  class="div-2">
+             <div class="div-2A">
+               <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
+             </div>
+           </div>
+           <div class="div-3">
+              <div class="div-4">
+                Sign in to Infinity
+                <div class="div-5">
+                    "Innovation is the key"
+                 </div>
+              </div>
+
+             
+              
+            </div>          
+          </div>
+        
+      
+
       <mat-card-content>
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-          <p>Please login to continue</p>
+          <mat-input-container class="full-width-input" >
+          <input matInput placeholder="User Name" formControlName="phone" required>
+             <mat-error *ngIf="userForm.controls.phone.hasError('required')" class="alert alert-danger" >
+                    Username/Phone No. Required
+              </mat-error>
+          </mat-input-container>
+
+          <div >
+            <a  (click)="forget()" class="forget">Forget Password?</a>
+          </div>
+          
           <mat-input-container class="full-width-input">
-            <input matInput placeholder=" Phone No." formControlName="phone" required>
-             <div *ngIf="userForm.controls['phone'].hasError('pattern')" class="alert alert-danger" >
-                    please Enter 10 digits....
+          <input matInput type="password" placeholder="Password"   formControlName="password" required>
+          </mat-input-container>
+          
+          <mat-card-actions >
+           <div class="b"> 
+             <div class="b1">
+                 <button mat-button><a (click)="register()">Create account</a></button>
+              </div>
+              <div class="b2">
+                <div class="b3">
+                 <button mat-raised-button color="primary" type="submit">Login</button>
                 </div>
-            <!-- <mat-error *ngIf="isFieldInvalid('phno')"> 
-              Please inform your phone no.
-            </mat-error> -->
-          </mat-input-container>
-          <mat-input-container class="full-width-input">
-            <input matInput type="password" placeholder="Password"   formControlName="password" required>
-            <!-- <mat-error *ngIf="isFieldInvalid('password')">
-              Please inform your password
-            </mat-error> -->
-          </mat-input-container>
-          <button mat-raised-button color="primary" type="submit">Login</button>
-          <button mat-raised-button color="primary" (click)="register()">Sign up</button>
+              </div>
+            </div> 
+            </mat-card-actions>
+          
         </form>
       </mat-card-content>
     </mat-card>

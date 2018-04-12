@@ -18,9 +18,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import { DialogDataExampleDialogComponent } from './dialog-data-example-dialog/dialog-data-example-dialog.component';
 import { RouterModule, Routes } from '@angular/router';
-
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSortModule,MatTabsModule} from '@angular/material';
+import {MatSortModule} from '@angular/material';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
@@ -34,7 +34,11 @@ import { UserComponent } from './user/user.component';
 import { DeleteComponent } from './delete/delete.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForgetComponent } from './forget/forget.component';
 
+import { PassworddisplayComponent } from './passworddisplay/passworddisplay.component';
+
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,13 +50,15 @@ import { ProfileComponent } from './profile/profile.component';
     UserComponent,
     DeleteComponent,
     RegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    ForgetComponent,
+    PassworddisplayComponent
   ],
   imports: [
   BrowserModule,HttpClientModule,MatIconModule,MatTableModule,MatPaginatorModule,
     NoopAnimationsModule,MatDialogModule,MatFormFieldModule,MatInputModule,
     MatButtonModule,FormsModule,ReactiveFormsModule,MatGridListModule,MatToolbarModule,
-    MatCardModule,MatSortModule,MatProgressSpinnerModule,BrowserAnimationsModule,MatTabsModule,
+    MatCardModule,MatSortModule,MatProgressSpinnerModule,BrowserAnimationsModule,MatTabsModule,MatIconModule,
     RouterModule.forRoot([
       
       {path:"home",component:HomeComponent, children: [
@@ -64,6 +70,9 @@ import { ProfileComponent } from './profile/profile.component';
         }]},
       { path: 'register',  component: RegistrationComponent  },
       { path: 'login',  component: LoginComponent },
+      { path: 'forget', component: ForgetComponent},
+      { path:'passworddisplay', component:PassworddisplayComponent  }
+
   ])
   ],
   entryComponents: [

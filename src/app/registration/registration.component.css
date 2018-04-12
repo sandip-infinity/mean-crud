@@ -46,9 +46,66 @@ mat-card {
     padding: 60px 1rem;
   }
   .full-width-input {
-    width: 100%;
+    width: 80%;
   }
   p{
       background-color:  rgb(91, 12, 196);
       color: snow;
   }
+
+  ::ng-deep .example-header-image {
+    background-image: url('https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk');
+    background-size: cover;
+    background-color: white;
+    float: right;
+  }
+  mat-card-title{
+    float: center;
+}
+  mat-card-subtitle{
+      color: white;
+      float: right;
+  }
+
+  ::ng-deep .mat-card-header {
+    background-color: rgb(10, 12, 148) !important;
+    padding: 4px !important;
+    color: white;
+}
+::ng-deep .mat-card {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-card-content {
+    padding: 5px !important;
+}
+
+
+.div-1{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    /* -webkit-box-pack: start; */
+}
+
+.div-2{
+
+    width: 50px;
+}
+img{
+    width: 144%;
+}
+
+.div-3{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div-4{
+    text-align: center;
+}
+
+div {
+    display: block;
+}

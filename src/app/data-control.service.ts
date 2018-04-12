@@ -7,9 +7,11 @@ export class DataControlService {
   url:string = 'http://localhost:4001/user';
   constructor(private http:HttpClient) { }
   
-  getData(pageIndex,pageSize){
-    console.log("bdhascbzx",pageSize)
-    return this.http.get(this.url+'/get/'+pageIndex+'/'+pageSize);
+  getData(pageIndex,pageSize,filtervalue,sortActive,sortDirection){
+    console.log("bdhascbzx",pageSize,    this.url+'/get/'+pageIndex+'/'+pageSize+'/'+filtervalue+'/'+
+    sortActive+'/'+sortDirection)
+    return this.http.get(this.url+'/get/'+pageIndex+'/'+pageSize+'/'+
+      sortActive+'/'+sortDirection);
   }
 
   saveData(post){
@@ -27,4 +29,8 @@ export class DataControlService {
 //    console.log("update data",post);
     return this.http.put(this.url+'/update/'+id,post);
   }
+
+  public search(pageIndex,pageSize,filterValue):any{
+    return this.http.get(this.url+'/search/'+pageIndex+'/'+pageSize+'/'+filterValue);
+   }
 }

@@ -37,11 +37,16 @@ Users.find({}, function(err, data) {
 		console.log(data, data.length); 
 	});*/
 
-app.get('/user/get/:pageIndex/:pageSize',function(req,res){
-	console.log("PageIndex :",req.params.pageIndex,"PageSize :",req.params.pageSize);
+app.get('/user/get/:pageIndex/:pageSize/:sortActive/:sortDirection',function(req,res){
+	console.log("get data PageIndex :",req.params.pageIndex,"PageSize :"
+	,req.params.pageSize," filtervalue :",req.params.filterValue," sortActive :",req.params.sortActive," sortDirection :",
+	req.params.sortDirection);
+
 	var skip=((parseInt(req.params.pageIndex)+1)-1)*parseInt(req.params.pageSize);
 	var size=parseInt(req.params.pageSize);
 	pageNo=parseInt(req.params.pageIndex)+1;
+	
+	var query;
 	Users.count({}, function(err, count) { 
 		if(err){
 			totalcount=0;
@@ -51,65 +56,74 @@ app.get('/user/get/:pageIndex/:pageSize',function(req,res){
 			totalcount=count;
 		}
 	});
-	var query=Users.find();
-	query.skip(skip);
-	console.log("size",size)
-	query.limit(size);
-	query.exec(function(err, docs){
-		console.log("resultbvjnvn",docs);
-		var result = {
-			"totalRecords" : totalcount,
-			"nextPage":pageNo,
-			"result": docs
-		};
-		res.send({'validation': 'result get successfully', 'status': 'true',
-		'pageSize':size,'result':result});
-	});
-	/*
-	Users.paginate({}, { page: pageNo, limit: limit }, function(err, result) {
-		// result.docs 
-		// result.total 
-		// result.limit - 10 
-		// result.page - 3 
-		// result.pages 
-		console.log("result: n",result)
-	});
-	
-	/*
-	Users.find().skip(skip).limit(limit).exec(function(err, docs){
-
-        if(err){
-            res.send({'validation': 'Errors...', 'status': 'false'});
-        }
-        else if(!docs){
-            res.send({'validation': 'Empty docs...', 'status': 'false'});
-        }
-        else{
-            var result = {
-                "totalRecords" : totalcount,
-                "page": pageNo,
-                "nextPage": pageNo + 1,
-                "result": docs
-            };
-            res.send({'validation': 'result get successfully', 'status': 'true','result':result});
-        }
-
-    });*/
+	query=Users.find();
+			if(req.params.sortActive==' ' || req.params.sortDirection==' '){
+				query.skip(skip);
+				query.limit(size);
+				}else{
+					var col=req.params.sortActive;
+					var dir=(req.params.sortDirection=='asc')?1:-1;
+					query.sort({[col]:dir})
+					query.skip(skip);
+					query.limit(size);
+				}
+				query.exec(function(err, docs){
+					console.log("resultbvjnvn",docs);
+					var result2 = {
+						"totalRecords" : totalcount,
+						"nextPage":pageNo,
+						"result": docs
+					};
+					res.send({'validation': 'result get successfully', 'status': 'true',
+					'pageSize':size,'result':result2});
+				});
+			
 });
 
-app.post("/user/login",function(req,res){
+//filter
+app.get('/user/search/:pageIndex/:pageSize/:filterValue',function(req,res){
+	console.log("get data2",req.params.pageIndex,req.params.pageSize,req.params.filterValue);
+	var param=req.params.filterValue;
+	console.log("param :",param);
+	var result=[];
+	Users.find( {}, function(err,docs){
+ 		if(!err){ console.log(docs[0].firstname,docs.length);
+			for(var i=0;i<docs.length;i++)
+			{
+				//var str1=docs[i].id;
+				var str2=docs[i].firstname.toLowerCase();
+				var str3=docs[i].lastname.toLowerCase();
+				var str4=docs[i].email.toLowerCase();
+				var str5=docs[i].phone;
+				//var str6=docs[i].createdDate;
+				//var str7=docs[i].updatedDate;
+
+				if(str2.includes(param.toLowerCase()) || str3.includes(param.toLowerCase()) || 					str4.includes(param.toLowerCase()) || str5==parseInt(param))
+				{
+					result.push(docs[i]);
+				}
+			}//for
+			
+		}//if
+		console.log("result array :",result);
+		res.send(result);
+	});
+});
+
+//LogIn
+app.post("/login",function(req,res){
     console.log("login : ",req.body);
-    Users.find({$and:[{phone:req.body.phone},{password:req.body.password}]}, function(err, data) { 
-		if(data){
-		console.log(data); 
-		res.send(data);}
-		else{
-			throw err;
+    Users.find({phone:req.body.phone,password:req.body.password}, function(err, user) { 
+		if(err){
+		 console.log("Err"); 
+		res.send(false);
 		}
+		 res.send(user);
     });
 });
 
-app.post("/user/signup",function(req,res){
+//SignUp
+app.post("/register",function(req,res){
 console.log(req.body);
 	var today = new Date();
 	var dd = today.getDate();
@@ -119,25 +133,6 @@ console.log(req.body);
 	if(mm<10){ mm='0'+mm;} 
 	var today = dd+'/'+mm+'/'+yyyy;
 	console.log("Date ",today);
-
-	// var item={
-	// 	id:
-	// 	firstname:req.body.firstname,
-	// 	lastname:req.body.lastname,
-	// 	phone:req.body.phone,
-	// 	email:req.body.email,
-	// 	password:req.body.password,
-	// 	cpassword:req.body.cpassword,
-	// 	createdDate:today,
-	// 	updatedDate:'',
-	// 	status:'Active'
-	// }
-	// var data= new Users(item);
-    // data.save(function(err, doc){
-	// 	if(err) res.send({'validation': 'Something missing... or not doing in proper way', 'status': 'false'});
-	// 	else res.send({'validation': 'Successfully inserted..', 'status': 'true'});
-	// });
-    // console.log("Data inserted");
 
 	Users.find({}, function(err, data) { 
 		if(data){
@@ -178,10 +173,9 @@ app.post('/user/add',function(req,res){
 		if(data){
 		//console.log(data); 
 		new Users({
-			'id':data.length+1,
-			'firstname':req.body[0].firstname,'lastname':req.body[0].lastname,
-			'email':req.body[0].email,'phone':req.body[0].phone,'password':req.body[0].password,
-			'createdDate':today,'updatedDate':'', 'status':'active'
+			'id':data.length+1,'firstname':req.body[0].firstname,'lastname':req.body[0].lastname,'email':req.body[0].email,
+			 'phone':req.body[0].phone,'password':req.body[0].password,'createdDate':today,'updatedDate':'',
+			 'status':'active'
 			}).save(function(err, doc){
 				if(err) res.send({'validation': 'Something missing... or not doing in proper way', 'status': 'false'});
 				else res.send({'validation': 'Successfully inserted..', 'status': 'true'});
@@ -222,40 +216,8 @@ app.put('/user/update/:userId', function(req, res){
 	});
  });
 
-app.post("/user/register",function(req,res){
-	console.log(req.body);
-	var today = new Date();
-	var dd = today.getDate();
-	var mm = today.getMonth()+1; //January is 0!
-	var yyyy = today.getFullYear();
-	if(dd<10){ dd='0'+dd;} 
-	if(mm<10){ mm='0'+mm;} 
-	var today = dd+'/'+mm+'/'+yyyy;
 
-	mc.connect("mongodb://127.0.0.1:27017",function(err,conn){
-		var dbc=conn.db('userDetails');
-		dbc.collection('User').find().count()
-		.then(function(numItems) {
-		console.log("count :",numItems);
-		var myobj={'id':numItems+1,'firstname':req.body.fnm,'lastname':req.body.lnm,'email':req.body.email,
-				'phone':req.body.phno,'password':req.body.cpass,'createdDate':today,'updatedDate':'',
-				'status':'active'};
-		console.log("myobj :",myobj);
-		dbc.collection("User").insertOne(myobj, function(err, response) {
-			if(err) throw err;
-			if(response){
-				console.log("record inserted");
-				dbc.collection("userDetails").find({'id':numItems+1}).toArray(function(err,data){
-				   if (err) throw err;
-				   console.log("result :",data);
-				   res.send({'status':'success','data':data});
-				});
-			}});
-			
-		});
-	});//mongo
 
-});
 app.listen(4001,function(){
     console.log("Server is running on 4001");
 });

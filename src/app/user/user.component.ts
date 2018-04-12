@@ -3,6 +3,9 @@ import { Component, ElementRef, OnInit,ViewChild } from '@angular/core';
 import {MatTableDataSource, PageEvent} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import {MatPaginator, MatSort} from '@angular/material';
+import {FormControl} from '@angular/forms';
+
+import {Observable,Subscription} from 'rxjs/Rx';
 
 import { DataControlService } from '../data-control.service';
 import { DialogComponent } from '../dialog/dialog.component';
@@ -24,7 +27,11 @@ export class UserComponent implements OnInit {
   pageSize:number=3;
   pageIndex;
   pageSizeOptions = [3,5,10,12];
-  _id;
+  _id;data1;
+
+  firstName="";
+  firstNameControl = new FormControl();
+  formCtrlSub: Subscription;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -36,13 +43,36 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.paginator.pageSize=3;
-    this.loadData(this.paginator);
-  }
+    this.paginator.pageSize=3;
+    this.sort.active=" ";
+      this.sort.direction="asc";
+   this.loadData(this.paginator);
+
+   
+   this.formCtrlSub = this.firstNameControl.valueChanges
+   .debounceTime(1500)
+   .subscribe(newValue => {this.firstName = newValue
+     if(this.firstName==""){
+       console.log("filter value :",this.firstName);
+       this.dataSource=new MatTableDataSource(this.data1 as Array<any>);
+     }else{
+       console.log("filter value :",this.firstName);
+       this.service.search(this.paginator.pageIndex,this.paginator.pageSize,this.firstName).subscribe((res)=>{
+       console.log('filter result :',res);
+       this.dataSource=new MatTableDataSource(res as Array<any>);
+       });
+     }
+   });
+
+  }//ngoninit
+
+  //onPageChange
 
   loadData(event:PageEvent){
-     console.log("paginator :",event.pageSize);
-    this.service.getData(event.pageIndex,event.pageSize).subscribe(response=>{
+    // console.log("paginator :",event.pageSize);
+    
+     console.log("filter :",this.firstName);
+    this.service.getData(event.pageIndex,event.pageSize,this.firstName,this.sort.active,this.sort.direction).subscribe(response=>{
       var res=response['result'];
       console.log("server get all users data :",res);
       this.dataSource=new MatTableDataSource(res['result'] as Array<any>);
@@ -50,9 +80,38 @@ export class UserComponent implements OnInit {
       console.log("lengthscxz",this.length);
       this.pageIndex=res['nextPage'];
        this.pageSize=response['pageSize'];
+       this.data1=this.dataSource.data;
+      // console.log("dataxnxnc",this.dataSource);
     //   this.data1=this.dataSource.data;
     })
   }
+
+  sortData(sort: MatSort){
+    const data = this.dataSource.data;
+    console.log("fhc",this.sort.direction);
+    if (!this.sort.active || this.sort.direction =="") {
+      console.log("ghfjmbkm, ",this.data1);
+      this.sort.active=" ";
+      this.sort.direction="asc";
+      //let sort={sortActive:" ",sortDirection:" "}
+      this.loadData(this.paginator)
+     // this.dataSource.data = this.data1;
+      return;
+    }
+
+      this.loadData(this.paginator)
+
+      // this.http.get('http://localhost:4000/sortData/'+this.paginator.pageIndex+'/'+this.paginator.pageSize+'/'+this.sort.active+'/'+this.sort.direction).subscribe(
+      //   data=>{
+      //     console.log("on data load server result :",data);
+      //     this.dataSource = new MatTableDataSource(data['data'] as Array<any>);
+      //    // this.dataObject=data['data'] as Array<any>; 
+      //     this.pageSize=data['pageSize'];
+      //     this.pageIndex=data['pageIndex'];
+      //     this.length=data['length'];
+      //     this.data1=this.dataSource.data;
+      //   });
+     }
 
   add(){
     let dialogRef= this.dialog.open( DialogDataExampleDialogComponent,{

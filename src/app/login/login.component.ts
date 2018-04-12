@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { Router,ActivatedRoute } from '@angular/router'
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,32 +25,38 @@ public app:AppComponent ){}
 
   
 
-  
   ngOnInit(){
     this.userForm=this._formBuilder.group({
-      phone:["",[Validators.required]],
+      phone:["",[Validators.required,Validators.maxLength(10)]],
       password: ["",[Validators.required]]      
     });
   }
 
   onSubmit(){
     console.log(this.userForm.value);
-    
-    this.http.post("http://localhost:4001/user/login",this.userForm.value).subscribe(result => {
+    this.http.post("http://localhost:4001/login",this.userForm.value).subscribe(result => {
 
+   if(result==false)
+   {
+    console.log("Invalid User");
+    this.route.navigateByUrl('login'); 
+   }
+   else{   
     console.log(result);
+    console.log("Valid User");
     this.app.profiledata=result;
-    // this.onadd.emit(result);
-    
-      console.log("Valid User");
-      this.route.navigateByUrl('home');
-     },(error)=>{
-       console.log("Invalid User");  
-     });
+    this.route.navigateByUrl('home');
+       }  
+    });
 
   }
   register(){
     this.route.navigateByUrl('register');
   }
+
+  gorget(){
+    this.route.navigateByUrl('forget');  
+  }
+
 
 }

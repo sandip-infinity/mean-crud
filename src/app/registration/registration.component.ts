@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(){
     console.log(this.userForm1.value);
-    this.http.post("http://localhost:4001/user/signup",this.userForm1.value).subscribe(result => {
+    this.http.post("http://localhost:4001/register",this.userForm1.value).subscribe(result => {
       console.log("register successful");
      });
      this.router.navigate(['/login']);

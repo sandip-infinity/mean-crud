@@ -1,0 +1,9 @@
+<form [formGroup]="userForm2" (ngSubmit)="onSubmit()">
+  <h2>Find Your UserName and Password</h2>  
+  
+  <mat-input-container class="full-width-input">
+      <input matInput placeholder="Enter Your Phone No." formControlName="phone" >
+  </mat-input-container>
+
+  <button mat-raised-button color="primary" type="submit">Next</button>
+</form>  

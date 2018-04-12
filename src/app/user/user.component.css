@@ -10,8 +10,12 @@
     max-height: 500px;
   }
 
-  .abc{
-    background-color: rgb(96, 34, 177);
-    color: white;
-    margin-left: 80%;
-}
+  .form{
+    min-height: 64px;
+  padding: 8px 24px 0;
+  }
+
+  .buttons{
+    margin-right: 5%;
+    margin-left: 90%;
+  }
