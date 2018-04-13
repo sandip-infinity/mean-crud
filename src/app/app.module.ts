@@ -20,7 +20,7 @@ import { DialogDataExampleDialogComponent } from './dialog-data-example-dialog/d
 import { RouterModule, Routes } from '@angular/router';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSortModule} from '@angular/material';
+import {MatSortModule,MatSnackBarModule} from '@angular/material';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
@@ -58,7 +58,7 @@ import { PassworddisplayComponent } from './passworddisplay/passworddisplay.comp
   BrowserModule,HttpClientModule,MatIconModule,MatTableModule,MatPaginatorModule,
     NoopAnimationsModule,MatDialogModule,MatFormFieldModule,MatInputModule,
     MatButtonModule,FormsModule,ReactiveFormsModule,MatGridListModule,MatToolbarModule,
-    MatCardModule,MatSortModule,MatProgressSpinnerModule,BrowserAnimationsModule,MatTabsModule,MatIconModule,
+    MatCardModule,MatSortModule,MatProgressSpinnerModule,BrowserAnimationsModule,MatTabsModule,MatIconModule,MatSnackBarModule,
     RouterModule.forRoot([
       
       {path:"home",component:HomeComponent, children: [

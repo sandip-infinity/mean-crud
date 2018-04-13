@@ -1,47 +1,16 @@
-/* .container {
-    margin-left: 30%;
-    margin-right: 40%;
-    height: 70%;
-    width: 40%;
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}
-
-header{
-    align-items: center;
-    padding: 4px;
-    background-color: rgb(35, 84, 243);
-}
-
-img{
-    float: left;
-    background: #555;
-    width: 8%;
-    height:8%; 
-}
-
-.example-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .example-container > * {
-    width: 100%;
-  }
-  button{
-    display: flex;
+mat-card-head{
+    /* transition: none !important; */
+    /* no-shadow: none !important; */
     
-    justify-content: space-around;
-    color: rgb(21, 75, 223);
-
-} */
-
-
+}
+mat-card-create{
+    border-radius: 10px;
+}
 mat-card {
-    max-width: 400px;
-    margin: 2em auto;
+    max-width: 300px;
+    margin: auto;
     text-align: center;
+    border-radius: 10px;
   }
   .signin-content {
     padding: 60px 1rem;
@@ -49,36 +18,37 @@ mat-card {
   .full-width-input {
     width: 100%;
   }
- 
+
+ .div-a{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+ .div-1{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+ }
+ img{
+     width: 100px;
+ }
+
+ .mat-card-create{
+     margin-top: 15px;
+ }
 
 
   .forget{
       float: right;
   }
-
-  /* ::ng-deep .example-header-image {
-    background-image: url('https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk');
-    background-size: cover;
-    background-color: white;
-    float: right;
-  } */
-
-::ng-deep .mat-card {
-    padding: 0 !important;
-}
-
-::ng-deep .mat-card-content {
-    padding: 5px !important;
-}
-
-.div-1{
+/* .div-1{
     display: flex;
     justify-content: flex-start;
     width: 100%;
     background-color: rgb(10, 12, 148) !important;
     color: white;
     padding: 4px !important;
-    /* -webkit-box-pack: start; */
+   
 }
 
 .div-2{
@@ -99,23 +69,18 @@ img{
 
 div {
     display: block;
-}
-.b{
-    display:flex;
-    justify-content:space-between;
-    width: 100%;
-    margin-left: 5%;
-}
-.b1{
-    width: 50px;
-}
-.b2{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+} */
 
+
+/* .b1{
+    width: 50px;
+} */
+
+.b2{
+width: 252px;
+border-radius: 10px;
 }
+
 
 
 

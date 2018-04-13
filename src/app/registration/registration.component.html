@@ -1,25 +1,18 @@
-
-    <div class="signin-content">
-        <mat-card>
-            <mat-card-header>
-                <div class="div-1">
-                   <div  class="div-2">
-                     <div class="div-2A">
-                       <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
-                     </div>
-                   </div>
-                   <div class="div-3">
-                      <div class="div-4">
-                        <mat-card-title>Sign in to INFINITYLABS</mat-card-title>
-                        <mat-card-subtitle>"Innovation is the key"</mat-card-subtitle> 
-                      </div>
-                    </div>          
-                  </div>
-                </mat-card-header>
-
-          <mat-card-content>
+<div class="signin-content">
+        <!-- <div class="div-1">
+              <div  class="div-2">
+                  <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
+              </div>          
+        </div> -->
+        <div class="div-a">
+            <div class="div-b">
+                <h1> Sign Up to Infinity</h1>
+            </div>
+       </div>
+      
+      <mat-card>
+        <mat-card-content>
             <form [formGroup]="userForm1" (ngSubmit)="onSubmit()">
-              
               <mat-input-container class="full-width-input">
                 <input matInput placeholder=" First Name" formControlName="firstname" >
               </mat-input-container>
@@ -52,5 +45,5 @@
             </form>
           </mat-card-content>
         </mat-card>
-      </div>
+</div>
 

@@ -1,28 +1,18 @@
 
 <div class="signin-content">
-    <mat-card>
-        
-        <div class="div-1">
+          <div class="div-1">
            <div  class="div-2">
-             <div class="div-2A">
                <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
-             </div>
-           </div>
-           <div class="div-3">
-              <div class="div-4">
-                Sign in to Infinity
-                <div class="div-5">
-                    "Innovation is the key"
-                 </div>
-              </div>
-
-             
-              
-            </div>          
+           </div>          
           </div>
-        
+          <div class="div-a">
+              <div class="div-b">
+               <h1> Sign in to Infinity</h1>
+              </div>
+            </div>
+    <mat-card>
+          
       
-
       <mat-card-content>
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
           <mat-input-container class="full-width-input" >
@@ -40,20 +30,18 @@
           <input matInput type="password" placeholder="Password"   formControlName="password" required>
           </mat-input-container>
           
-          <mat-card-actions >
-           <div class="b"> 
-             <div class="b1">
-                 <button mat-button><a (click)="register()">Create account</a></button>
-              </div>
-              <div class="b2">
-                <div class="b3">
-                 <button mat-raised-button color="primary" type="submit">Login</button>
-                </div>
-              </div>
-            </div> 
+          <mat-card-actions>
+                 <button mat-raised-button class="b2" color="primary" type="submit">Login</button>
             </mat-card-actions>
           
         </form>
       </mat-card-content>
     </mat-card>
+
+    <mat-card class="mat-card-create">
+        <div class="b1">New to Infinity?
+           <a (click)="register()">Create account</a>
+        </div>      
+      </mat-card>
+
   </div>

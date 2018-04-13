@@ -38,12 +38,12 @@ public app:AppComponent ){}
 
    if(result==false)
    {
-    console.log("Invalid User");
+    console.log("Login Fail");
     this.route.navigateByUrl('login'); 
    }
    else{   
     console.log(result);
-    console.log("Valid User");
+    console.log("Login Success");
     this.app.profiledata=result;
     this.route.navigateByUrl('home');
        }  
