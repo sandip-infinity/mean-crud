@@ -1,5 +1,5 @@
-import { Component, OnInit,Output,EventEmitter,ViewChild,Inject } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA,MatDialogRef} from '@angular/material';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-delete',
@@ -12,16 +12,15 @@ export class DeleteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    
+
   }
 
-  onNoClick(){
-    this.onAdd.emit({status:'delete'});
+  onNoClick() {
+    this.onAdd.emit({ status: 'delete' });
     this.dialogRef.close();
   }
 
-  close(){
+  close() {
     this.dialogRef.close();
   }
-
 }

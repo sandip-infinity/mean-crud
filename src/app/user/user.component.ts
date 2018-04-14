@@ -1,11 +1,13 @@
-import { Component, ElementRef, OnInit,ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
+import { MatTableDataSource, PageEvent } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { MatPaginator, MatSort } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router'
 
-import {MatTableDataSource, PageEvent} from '@angular/material';
-import {MatDialog} from '@angular/material';
-import {MatPaginator, MatSort} from '@angular/material';
-import {FormControl} from '@angular/forms';
-
-import {Observable,Subscription} from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 import { DataControlService } from '../data-control.service';
 import { DialogComponent } from '../dialog/dialog.component';
@@ -19,181 +21,148 @@ import { DialogDataExampleDialogComponent } from '../dialog-data-example-dialog/
 })
 export class UserComponent implements OnInit {
 
-  displayedColumns = ['id', 'firstname', 'lastname', 'email','phone',
-                      'createdDate','updatedDate','actions'];
+  displayedColumns = ['id', 'firstname', 'lastname', 'email', 'phone',
+    'createdDate', 'updatedDate', 'actions'];
   dataSource = new MatTableDataSource([]);
-  
-  length :number;
-  pageSize:number=3;
-  pageIndex;
-  pageSizeOptions = [3,5,10,12];
-  _id;data1;
 
-  firstName="";
+  length: number;
+  pageSize: number = 3;
+  pageIndex;
+  pageSizeOptions = [3, 5, 10, 12];
+  _id; data1;
+
+  flag: boolean = false;
+  firstName = "";
   firstNameControl = new FormControl();
   formCtrlSub: Subscription;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('filter') filter:ElementRef;
+  @ViewChild('filter') filter: ElementRef;
   @ViewChild('input') inputElRef: ElementRef;
-  
-  constructor(private service:DataControlService,public dialog: MatDialog) { 
-    
+
+  private sub: any;
+
+  constructor(private service: DataControlService,
+    public dialog: MatDialog, private route: ActivatedRoute,
+    private router: Router) {
+    this.route.queryParams.map(params => {
+      // this.sub = params['id'];
+      console.log("user component route :", this.route);
+      console.log("edit hello", params['id']);
+    });
   }
 
   ngOnInit() {
-    this.paginator.pageSize=3;
-    this.sort.active=" ";
-      this.sort.direction="asc";
-   this.loadData(this.paginator);
+    this.paginator.pageSize = 3;
+    this.sort.active = " ";
+    this.sort.direction = "asc";
+    this.loadData(this.paginator);
 
-   
-   this.formCtrlSub = this.firstNameControl.valueChanges
-   .debounceTime(1500)
-   .subscribe(newValue => {this.firstName = newValue
-     if(this.firstName==""){
-       console.log("filter value :",this.firstName);
-       this.dataSource=new MatTableDataSource(this.data1 as Array<any>);
-     }else{
-       console.log("filter value :",this.firstName);
-       this.service.search(this.paginator.pageIndex,this.paginator.pageSize,this.firstName).subscribe((res)=>{
-       console.log('filter result :',res);
-       this.dataSource=new MatTableDataSource(res as Array<any>);
-       });
-     }
-   });
+
+    this.formCtrlSub = this.firstNameControl.valueChanges
+      .debounceTime(1500)
+      .subscribe(newValue => {
+        this.firstName = newValue
+        if (this.firstName == "") {
+          console.log("filter value :", this.firstName);
+          this.dataSource = new MatTableDataSource(this.data1 as Array<any>);
+        } else {
+          console.log("filter value :", this.firstName);
+          this.service.search(this.paginator.pageIndex, this.paginator.pageSize, this.firstName).subscribe((res) => {
+            console.log('filter result :', res);
+            this.dataSource = new MatTableDataSource(res as Array<any>);
+          });
+        }
+      });
 
   }//ngoninit
 
-  //onPageChange
+  edit(data: any) {
+    // this.router.navigate(['User/edit'],{queryParams: {"id":data.id}});
+    //this.router.navigate(['User/edit',data.id,data.id]);
+    this.router.navigate(['home/User/edit'], {
+      queryParams:
+        {
+          "id": data.id, "firstname": data.firstname, "lastname": data.lastname
+          , "email": data.email, "phone": data.phone, "objectId": data._id
+        }
+    });
+  }//edit
 
-  loadData(event:PageEvent){
-    // console.log("paginator :",event.pageSize);
-    
-     console.log("filter :",this.firstName);
-    this.service.getData(event.pageIndex,event.pageSize,this.firstName,this.sort.active,this.sort.direction).subscribe(response=>{
-      var res=response['result'];
-      console.log("server get all users data :",res);
-      this.dataSource=new MatTableDataSource(res['result'] as Array<any>);
-      this.length=res['totalRecords'];
-      console.log("lengthscxz",this.length);
-      this.pageIndex=res['nextPage'];
-       this.pageSize=response['pageSize'];
-       this.data1=this.dataSource.data;
-      // console.log("dataxnxnc",this.dataSource);
-    //   this.data1=this.dataSource.data;
+  view(data: any) {
+    this.router.navigate(['home/User/view'], {
+      queryParams: {
+        "id": data.id,
+        "firstname": data.firstname, "lastname": data.lastname
+        , "email": data.email, "phone": data.phone, "createdDate": data.createdDate
+        , "updatedDate": data.updatedDate, "status": data.status
+      }
+    });
+  }
+
+  add() {
+    this.router.navigate(['home/User/add']);
+  }//add
+
+  delete(data: any) {
+    // this.router.navigate(['User/delete'],{queryParams:{"id":data.id}});
+    let dialogRef = this.dialog.open(DeleteComponent, {
+      height: '200px',
+      width: '500px',
+      data: {
+        id: data.id, firstname: data.firstname, lastname: data.lastname,
+        email: data.email, phone: data.phone, password: data.password, createdDate: data.createdDate
+        , updatedDate: data.updatedDate, status: data.status
+      }
+    })
+    const sub = dialogRef.componentInstance.onAdd.subscribe((res) => {
+      // console.log("f data :",res);
+      if (res.status == 'delete') {
+        this.service.deleteData(data._id).subscribe((res) => {
+          console.log("delete : server result", res);
+          if (res['status'] == 'true') {
+            console.log(res['validation']);
+            this.loadData(this.paginator);
+          } else {
+            console.log(res['validation']);
+          }
+        });
+      }//if
+    });
+    dialogRef.afterClosed().subscribe();
+  }
+
+  loadData(event: PageEvent) {
+
+    //     console.log("filter :",this.firstName);
+    this.service.getData(event.pageIndex, event.pageSize, this.firstName, this.sort.active, this.sort.direction).subscribe(response => {
+      var res = response['user'];
+      console.log("server get all users data :", res);
+      this.dataSource = new MatTableDataSource(res['result'] as Array<any>);
+      this.length = res['totalRecords'];
+      //console.log("lengthscxz",this.length);
+      this.pageIndex = res['nextPage'];
+      this.pageSize = this.paginator.pageSize;
+      this.data1 = this.dataSource.data;
+
     })
   }
 
-  sortData(sort: MatSort){
+  sortData(sort: MatSort) {
     const data = this.dataSource.data;
-    console.log("fhc",this.sort.direction);
-    if (!this.sort.active || this.sort.direction =="") {
-      console.log("ghfjmbkm, ",this.data1);
-      this.sort.active=" ";
-      this.sort.direction="asc";
+    //console.log("fhc",this.sort.direction);
+    if (!this.sort.active || this.sort.direction == "") {
+      //  console.log("ghfjmbkm, ",this.data1);
+      this.sort.active = " ";
+      this.sort.direction = "asc";
       //let sort={sortActive:" ",sortDirection:" "}
       this.loadData(this.paginator)
-     // this.dataSource.data = this.data1;
+      // this.dataSource.data = this.data1;
       return;
     }
 
-      this.loadData(this.paginator)
-
-      // this.http.get('http://localhost:4000/sortData/'+this.paginator.pageIndex+'/'+this.paginator.pageSize+'/'+this.sort.active+'/'+this.sort.direction).subscribe(
-      //   data=>{
-      //     console.log("on data load server result :",data);
-      //     this.dataSource = new MatTableDataSource(data['data'] as Array<any>);
-      //    // this.dataObject=data['data'] as Array<any>; 
-      //     this.pageSize=data['pageSize'];
-      //     this.pageIndex=data['pageIndex'];
-      //     this.length=data['length'];
-      //     this.data1=this.dataSource.data;
-      //   });
-     }
-
-  add(){
-    let dialogRef= this.dialog.open( DialogDataExampleDialogComponent,{
-      height:'550px',
-      width:'500px'
-    })
-    const sub = dialogRef.componentInstance.onAdd.subscribe((res) => {
-    //console.log("f data :",res);
-       this.service.saveData(res).subscribe((result)=>{
-         console.log("server add result",result)
-         if(result['status']=='true'){
-          console.log("record inserted successfully. ");
-          this.loadData(this.paginator);
-         }
-         else{
-          console.log("insertion failed.");
-         }
-     });
-     });
-  }//openDialog
-
-  delete(data:any){
-    let dialogRef= this.dialog.open( DeleteComponent,{
-      height:'200px',
-      width:'500px',
-      data:{id:data.id,firstname:data.firstname,lastname:data.lastname,
-        email:data.email,phone:data.phone,password:data.password,createdDate:data.createdDate
-        ,updatedDate:data.updatedDate,status:data.status}
-    })
-    const sub = dialogRef.componentInstance.onAdd.subscribe((res) => {
-    // console.log("f data :",res);
-      if(res.status=='delete'){
-        this.service.deleteData(data._id).subscribe((res)=>{
-           console.log("delete : server result",res);
-           if(res['status']=='true'){
-             console.log(res['validation']);
-             this.loadData(this.paginator);
-           }else{
-            console.log(res['validation']);
-           }
-         });
-      }//if
-     });
-    dialogRef.afterClosed().subscribe();
+    this.loadData(this.paginator);
   }
-
-  edit(data:any){
-    this._id=data._id;
-    //this.index1=this.dataSource.data.indexOf(data);
-    let dialogRef= this.dialog.open(EditDialogComponent,{
-      height:'430px',
-      width:'500px',
-      data:{firstname:data.firstname,lastname:data.lastname,
-            email:data.email,phone:data.phone}
-    });
-
-    const sub = dialogRef.componentInstance.onAdd.subscribe((res) => {
-    //  console.log("f data :",res);
-      this.service.updateData(res,this._id).subscribe((response)=>{
-        console.log("update : server result",response);
-        if(response['status']=='true'){
-          this.loadData(this.paginator);
-           // this.dataSource.data[this.index1]=res;
-        }
-        else{
-            console.log('updation failed');
-        }
-      });     
-    });
-
-    dialogRef.afterClosed().subscribe();
-  }//edit
-
-  view(data:any){
-    let dialogRef= this.dialog.open(DialogComponent,{
-      height:'500px',
-      width:'500px',
-      data:{id:data.id,firstname:data.firstname,lastname:data.lastname,
-        email:data.email,phone:data.phone,password:data.password,createdDate:data.createdDate
-        ,updatedDate:data.updatedDate,status:data.status}
-    })
-  }
-  
 
 }//class

@@ -1,4 +1,110 @@
-<body>
+<div class="row" style="width:100%;padding:10px;justify-content:space-between">
+    <form [formGroup]="form">
+        <div class="col-lg-4">
+            <mat-form-field>
+                <input matInput placeholder="Id" formControlName="id">
+                <mat-error *ngIf="form.controls['id'].hasError('required')">Id is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+            <mat-form-field>
+                <input matInput placeholder="First Name" formControlName="firstname">
+                <mat-error *ngIf="form.controls['firstname'].hasError('required')">First Name is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+            <mat-form-field>
+                <input matInput placeholder="Last Name" formControlName="lastname">
+                <mat-error *ngIf="form.controls['lastname'].hasError('required')">Last Name is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+            <mat-form-field>
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="form.controls['email'].hasError('required')">Email is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-4">
+            <mat-form-field>
+                <input type="number" matInput placeholder="Phone" formControlName="phone">
+                <mat-error *ngIf="form.controls['phone'].hasError('required')">Phone No is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-4">
+            <mat-form-field>
+                <input matInput placeholder="Password" formControlName="password">
+                <mat-error *ngIf="form.controls['password'].hasError('required')">Password No is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-12">
+            <button style="float:right" mat-raised-button color="primary" (click)="openSnackBar()">Update</button>
+        </div>
+    </form>
+</div>
+
+<!-- 
+    
+    <div class="container">
+    <div class="example-container">
+    <form [formGroup]="form" (ngSubmit)="onNoClick()">
+        <mat-grid-list cols="3" rowHeight="3:1">
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput placeholder="Id" formControlName="id">
+                    <mat-error *ngIf="form.controls['id'].hasError('required')">Id is required</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput placeholder="First Name" formControlName="firstname">
+                    <mat-error *ngIf="form.controls['firstname'].hasError('required')">First Name is required</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput placeholder="Last Name" formControlName="lastname">
+                    <mat-error *ngIf="form.controls['lastname'].hasError('required')">Last Name is required</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput placeholder="Email" formControlName="email">
+                    <mat-error *ngIf="form.controls['email'].hasError('required')">Email is required</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Phone" formControlName="phone">
+                    <mat-error *ngIf="form.controls['phone'].hasError('required')">Phone No is required</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput placeholder="Password" formControlName="password">
+                    <mat-error *ngIf="form.controls['password'].hasError('required')">Password No is required</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+    </div>
+
+    <div>
+            <button mat-raised-button color="primary" (click)="onNoClick()">Update</button>
+    </div>
+</div>
+    
+    
+    
+    
+    <body>
     <h3><b>Your Profile</b></h3>
     <hr><br>
     <Label>Id : </Label>{{app.profile[0].id}}<br>
@@ -7,7 +113,27 @@
     <Label>E-mail : </Label>{{app.profile[0].email}}<br>
     <Label>Phone : </Label>{{app.profile[0].phone}}<br>
     <!-- <Label>Password : </Label>{{data.password}}<br> -->
-    <Label>Created Date : </Label>{{app.profile[0].createdDate}}<br>
+<!-- <Label>Created Date : </Label>{{app.profile[0].createdDate}}<br>
     <Label>Updated Date : </Label>{{app.profile[0].updatedDate}}<br>
     <Label>Status : </Label>{{app.profile[0].status}}<br>
-</body>
+</body> -->
+<!-- <div class="container">
+        <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{app.profile[0].firstname}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <br>
+                    <Label>Id : </Label>{{app.profile[0].id}}<br>
+                    <Label>First Name : </Label>{{app.profile[0].firstname}}<br>
+                    <Label>Last Name : </Label>{{app.profile[0].lastname}}<br>
+                    <Label>E-mail : </Label>{{app.profile[0].email}}<br>
+                    <Label>Phone : </Label>{{app.profile[0].phone}}<br>
+                    <!-- <Label>Password : </Label>{{data.password}}<br> -->
+<!-- <Label>Created Date : </Label>{{app.profile[0].createdDate}}<br>
+                    <Label>Updated Date : </Label>{{app.profile[0].updatedDate}}<br>
+                    <Label>Status : </Label>{{app.profile[0].status}}<br>
+                </mat-card-content>
+              </mat-card>
+</div> -->

@@ -1,11 +1,8 @@
-<h3><b>Update Data</b></h3>
-<hr><br>
-<form [formGroup]="form" (ngSubmit)="onNoClick()">
-<div class="example-container">
-    <!-- <mat-form-field>
-      <input matInput placeholder="Id"  formControlName="id">
-    </mat-form-field>
-    <br> -->
+<h3>
+  <b>Update Data</b>
+</h3>
+<form [formGroup]="form">
+  <div class="example-container">
     <mat-form-field>
       <input matInput placeholder="First Name" formControlName="firstname">
       <mat-error *ngIf="form.controls['firstname'].hasError('required')">First Name is required</mat-error>
@@ -17,19 +14,19 @@
     </mat-form-field>
     <br>
     <mat-form-field>
-        <input matInput placeholder="Email" formControlName="email">
-        <mat-error *ngIf="form.controls['email'].hasError('required')">Email is required</mat-error>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error *ngIf="form.controls['email'].hasError('required')">Email is required</mat-error>
     </mat-form-field>
     <br>
     <mat-form-field>
-        <input type="number" matInput placeholder="Phone" formControlName="phone">
-        <mat-error *ngIf="form.controls['phone'].hasError('required')">Phone No is required</mat-error>
-        <mat-error *ngIf="form.controls['phone'].hasError('minLength')">Min length 10</mat-error>
+      <input type="number" matInput placeholder="Phone" formControlName="phone">
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-error *ngIf="form.controls['phone'].hasError('required')">Phone No is required</mat-error>
+      <mat-error *ngIf="form.controls['phone'].hasError('minLength')">Min length 10</mat-error>
     </mat-form-field>
-    <!-- <img src="{{data.avatar}}" alt="Smiley face" height="1%" width="15%" formControlName="avatar"> -->
   </div>
- <br>
-  <!-- {{form.value | json}} -->
-  <button mat-raised-button color="primary"  (click)="onNoClick()">Update</button>
+  <br>
+  <button mat-raised-button color="primary" (click)="update()">Update</button>
   <button mat-raised-button color="primary" (click)="close()">Cancel</button>
 </form>

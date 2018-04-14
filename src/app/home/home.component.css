@@ -1,18 +1,16 @@
 .demo-tab-group {
-  border: 1px solid #e8e8e8;
+  padding: 20px;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom:20px;
 }
 
-.demo-tab-content {
-  padding: 16px;
+mat-card{
+  justify-content: space-around;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom:20px;
 }
-
-nav{
-  font-size: 25px solid !important;
-  /* border: 1px solid #e8e8e8; */
-  padding: 16px;
-      display: flex;
-      flex-flow: row wrap;
-      align-items: center;
-}
-      
- 

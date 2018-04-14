@@ -1,30 +1,6 @@
-import { Component,Injectable, ElementRef, OnInit,ViewChild,Output,EventEmitter} from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {MatDialog} from '@angular/material';
-import { DialogDataExampleDialogComponent } from './dialog-data-example-dialog/dialog-data-example-dialog.component';
-
-
-import { DialogComponent } from './dialog/dialog.component';
-import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Observable,Subscription} from 'rxjs/Rx';
-import {merge} from 'rxjs/observable/merge';
-import {of as observableOf} from 'rxjs/observable/of';
-import {catchError} from 'rxjs/operators/catchError';
-import {map} from 'rxjs/operators/map';
-import {startWith} from 'rxjs/operators/startWith';
-import {switchMap} from 'rxjs/operators/switchMap';
-import {PageEvent} from '@angular/material';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/throttleTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import { Subject } from 'rxjs/Subject';
-import {Sort} from '@angular/material';
-import {FormControl} from '@angular/forms';
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -33,14 +9,28 @@ import { Router } from '@angular/router'
 })
 
 @Injectable()
-export class AppComponent implements OnInit{
- profile:any;
-  constructor(private router: Router) { }
+export class AppComponent implements OnInit {
+  profile: any;
+  currentUser: any;
+  flag: boolean = false;
+  parentRouteId: number;
 
+
+  constructor(private router: Router, private http: HttpClient,
+    private route: ActivatedRoute) {
+
+  }
   ngOnInit() {
-   this.router.navigate(['/login']);
-    console.log("hello");
+    // this.router.navigate(['/login']);
+  }
+
+  logout() {
+    this.flag = false;
+    this.currentUser = " ";
+    this.router.navigate(['/login/']);
+  }
+
+  passReset() {
+    this.router.navigate(['/update']);
   }
 }//class
-
-

@@ -1,34 +1,37 @@
 <div class="example-container">
-      <h3><b>Add Data</b></h3><hr>
-  <form [formGroup]="form"> 
-          <mat-form-field>
-            <input matInput placeholder="First Name" formControlName="firstname">
-            <mat-error *ngIf="form.controls['firstname'].hasError('required')">First Name is required</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-                <input matInput placeholder="Last Name" formControlName="lastname">
-                <mat-error *ngIf="form.controls['lastname'].hasError('required')">Last Name is required</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-                <input matInput placeholder="Email" formControlName="email">
-                <mat-error *ngIf="form.controls['email'].hasError('required')">Email is required</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-                <input type="number" matInput placeholder="Phone No" formControlName="phone">
-                <mat-error *ngIf="form.controls['phone'].hasError('required')">Phone No is required</mat-error>
-                <mat-error *ngIf="form.controls['phone'].hasError('minLength')">Min length 10</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-                <input type="password" matInput placeholder="Password" formControlName="password">
-                <mat-error *ngIf="form.controls['password'].hasError('required')">Password is required</mat-error>
-          </mat-form-field>
-          <br>
-          <button mat-raised-button color="primary" [disabled]="!form.valid"  (click)="onNoClick()">Save</button>
-          <button mat-raised-button color="primary" (click)="close()">Cancel</button>
-  <!-- {{form.value | json}} -->
-        </form>
+      <h3>
+            <b>Add Data</b>
+      </h3>
+      <form [formGroup]="form">
+            <mat-form-field>
+                  <input matInput placeholder="First Name" formControlName="firstname">
+                  <mat-error *ngIf="form.controls['firstname'].hasError('required')">First Name is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                  <input matInput placeholder="Last Name" formControlName="lastname">
+                  <mat-error *ngIf="form.controls['lastname'].hasError('required')">Last Name is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                  <input matInput placeholder="Email" formControlName="email">
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error *ngIf="form.controls['email'].hasError('required')">Email is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                  <input type="number" matInput placeholder="Phone No" formControlName="phone">
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error *ngIf="form.controls['phone'].hasError('required') && form.controls['phone'].hasError('touched')">Phone No is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  <input matInput placeholder="Enter password" [type]="hide ? 'password' : 'text'" formControlName="password">
+                  <mat-error *ngIf="form.controls['password'].hasError('required')">Password is required</mat-error>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="save()">Save</button>
+            <button mat-raised-button color="primary" (click)="close()">Cancel</button>
+      </form>
 </div>

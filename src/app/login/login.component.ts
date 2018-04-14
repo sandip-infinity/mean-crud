@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     private http:HttpClient,
   private route:Router){}
 
+  
   ngOnInit(){
     this.userForm=this._formBuilder.group({
       phone:["",[Validators.required]],
@@ -30,7 +31,9 @@ export class LoginComponent implements OnInit {
     this.http.post("http://localhost:4001/user/login",this.userForm.value).subscribe(result => {
       console.log("Valid User",result);
       this.app.profile=result;
-      this.route.navigateByUrl('home');
+      this.app.currentUser=result[0].firstname;
+      this.app.flag=true;
+      this.route.navigateByUrl('/home');
      },(error)=>{
        console.log("Invalid User");
       });

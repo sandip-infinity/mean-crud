@@ -15,8 +15,8 @@ export class DataControlService {
   }
 
   saveData(post){
-     //console.log("post data:",post);
-     var hello="hello";
+    console.log("post data:",post);
+   //  var hello="hello";
      return this.http.post(this.url+'/add',post);
    }
 
@@ -25,9 +25,16 @@ export class DataControlService {
      return this.http.delete(this.url+ "/delete/" +id);
    }
 
-   updateData(post,id) {
-//    console.log("update data",post);
+   updateData(id,post) {
+     //    console.log("update data",id,post);
     return this.http.put(this.url+'/update/'+id,post);
+  }
+
+  setNewPass(id,newPass){
+    
+    let v={'newPass':newPass};
+   // console.log("csdjc",v)
+    return this.http.put(this.url+'/setNewPass/'+id,v);
   }
 
   public search(pageIndex,pageSize,filterValue):any{
