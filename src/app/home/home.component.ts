@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
 
   tabLinks = [
     {label: 'User', link: 'user'},
-    {label: 'Profile', link: 'profile'}
+    {label: 'Profile', link: 'profile'},
+    {label: 'Product', link: 'product'}
   ];
 
   constructor(private router:Router,

@@ -37,6 +37,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ForgetComponent } from './forget/forget.component';
 
 import { PassworddisplayComponent } from './passworddisplay/passworddisplay.component';
+import { PassresetComponent } from './passreset/passreset.component';
+
 
   
 @NgModule({
@@ -52,7 +54,8 @@ import { PassworddisplayComponent } from './passworddisplay/passworddisplay.comp
     RegistrationComponent,
     ProfileComponent,
     ForgetComponent,
-    PassworddisplayComponent
+    PassworddisplayComponent,
+    PassresetComponent  
   ],
   imports: [
   BrowserModule,HttpClientModule,MatIconModule,MatTableModule,MatPaginatorModule,
@@ -71,7 +74,8 @@ import { PassworddisplayComponent } from './passworddisplay/passworddisplay.comp
       { path: 'register',  component: RegistrationComponent  },
       { path: 'login',  component: LoginComponent },
       { path: 'forget', component: ForgetComponent},
-      { path:'passworddisplay', component:PassworddisplayComponent  }
+      { path:'passworddisplay', component:PassworddisplayComponent  },
+      { path:'reset' , component:PassresetComponent}
 
   ])
   ],

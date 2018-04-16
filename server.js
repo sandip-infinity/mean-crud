@@ -1,6 +1,5 @@
 var express=require('express');
-var cors = require('cors')
-
+var cors = require('cors');
 app=express();
 app.use(cors());
 var bodyParser=require('body-parser');
@@ -11,6 +10,16 @@ var ObjectID = require('mongodb').ObjectID;
 var mongoose = require('mongoose');
 var url='mongodb://127.0.0.1:27017/userDetails';
 var Schema = mongoose.Schema;  
+var nodemailer = require('nodemailer'); 
+
+var transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+	  user: 'mangesh.ipper@gmail.com',
+	  pass: '08111994'
+	}
+  });
+
 mongoose.connect(url, function (err,res) {
     if (err) throw err;
     if(res){console.log("connected successfully");}else{console.log("connection failed");}
@@ -155,6 +164,46 @@ console.log(req.body);
 		}
 });
 
+});
+app.post("/emailpassword", function(req,res){
+
+	Users.find({email:req.body.email},function(err,user){
+		if(err){
+			res.send(false);
+		}
+
+		var transporter = nodemailer.createTransport("SMTP",{
+			host:"smtp.gmail.com",
+			service: 'gmail',
+			secureConnection:true,
+			port: 465,
+			auth: {
+			  user: 'mangesh.ipper@gmail.com',
+			  pass: '08111994'
+			},
+			tls:{
+				rejectUnauthorized:false
+			}
+		  });
+	
+		var mailOptions = {
+			from: 'mangeh.ipper@gmail.com',
+			to: req.body.email,
+			subject: 'Sending Email using Node.js',
+			text: '1st trial of sending email!!!'
+		  };
+		
+		  transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+			 return console.log(error);
+			} else {
+			  console.log(' Email sent: ' + info.response);
+			}
+			res.send(user);
+		});
+	})
+
+	
 });
 
 //add

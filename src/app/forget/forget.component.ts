@@ -20,24 +20,24 @@ public app:AppComponent) { }
 
   ngOnInit() {
     this.userForm2=this._formBuilder.group({
-      phone:["",[Validators.required]]
+      email:["",[Validators.required]],
     });
   }
 
 
   onSubmit(){
-    this.http.post("http://localhost:4001/user/forgetpassword",this.userForm2.value).subscribe(result => {
-
-    console.log(result);
-    this.app.profiledata=result;
-    // this.onadd.emit(result);
-      this.route.navigateByUrl('passworddisplay');
-     },(error)=>{
-       console.log("You enter Wrong phone No.");  
-     });
+    console.log(this.userForm2.value);
+    this.http.post("http://localhost:4001/emailpassword",this.userForm2.value).subscribe(result => {
+    
+    if(result==false){
+      console.log("You enter Wrong phone Number or email");
+    }
+    else{
+      console.log(result);
+      //this.onadd.emit(result);
+      this.route.navigateByUrl('reset');
+    } 
+  });
 
   }
-
-
-
 }

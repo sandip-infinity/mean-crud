@@ -54,7 +54,7 @@ public app:AppComponent ){}
     this.route.navigateByUrl('register');
   }
 
-  gorget(){
+  forget(){
     this.route.navigateByUrl('forget');  
   }
 
