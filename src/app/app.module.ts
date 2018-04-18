@@ -37,6 +37,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateComponent } from './update/update.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatDatepickerModule,MatNativeDateModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,9 +54,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     UpdateComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, MatIconModule, MatTableModule, MatPaginatorModule, MatMenuModule,
-    NoopAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSnackBarModule,
-    MatButtonModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatToolbarModule,
+    BrowserModule,MatSelectModule,
+     HttpClientModule, MatIconModule, MatTableModule, MatPaginatorModule, MatMenuModule,
+    NoopAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSnackBarModule,MatNativeDateModule,
+    MatButtonModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatToolbarModule,MatDatepickerModule,
     MatCardModule, MatSortModule, MatProgressSpinnerModule, BrowserAnimationsModule, MatTabsModule,
     RouterModule.forRoot([
       { path: "update", redirectTo: "update", pathMatch: "full" },

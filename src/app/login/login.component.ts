@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.http.post("http://localhost:4001/user/login",this.userForm.value).subscribe(result => {
       console.log("Valid User",result);
       this.app.profile=result;
-      this.app.currentUser=result[0].firstname;
+      this.app.currentUser=result[0].profile;
       this.app.flag=true;
       this.route.navigateByUrl('/home');
      },(error)=>{

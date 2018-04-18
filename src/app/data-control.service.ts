@@ -8,15 +8,16 @@ export class DataControlService {
   constructor(private http:HttpClient) { }
   
   getData(pageIndex,pageSize,filtervalue,sortActive,sortDirection){
-    console.log("bdhascbzx",pageSize,    this.url+'/get/'+pageIndex+'/'+pageSize+'/'+filtervalue+'/'+
-    sortActive+'/'+sortDirection)
     return this.http.get(this.url+'/get/'+pageIndex+'/'+pageSize+'/'+
       sortActive+'/'+sortDirection);
   }
 
+  getDataById(id){
+    return this.http.get(this.url+'/getById/'+id);
+  }
+
   saveData(post){
     console.log("post data:",post);
-   //  var hello="hello";
      return this.http.post(this.url+'/add',post);
    }
 

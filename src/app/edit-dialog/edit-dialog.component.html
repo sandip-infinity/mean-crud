@@ -25,6 +25,10 @@
       <mat-error *ngIf="form.controls['phone'].hasError('required')">Phone No is required</mat-error>
       <mat-error *ngIf="form.controls['phone'].hasError('minLength')">Min length 10</mat-error>
     </mat-form-field>
+    <div><span>profile</span>
+      <img src="{{profile}}">
+      <input type="file" id="avatar" formControlName="profile" placeholder="choose new" (change)="onFileChange($event)" accept="image/*" #fileInput>
+    </div>
   </div>
   <br>
   <button mat-raised-button color="primary" (click)="update()">Update</button>

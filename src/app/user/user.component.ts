@@ -22,7 +22,7 @@ import { DialogDataExampleDialogComponent } from '../dialog-data-example-dialog/
 export class UserComponent implements OnInit {
 
   displayedColumns = ['id', 'firstname', 'lastname', 'email', 'phone',
-    'createdDate', 'updatedDate', 'actions'];
+    'createdDate', 'updatedDate','actions'];
   dataSource = new MatTableDataSource([]);
 
   length: number;
@@ -58,8 +58,7 @@ export class UserComponent implements OnInit {
     this.sort.active = " ";
     this.sort.direction = "asc";
     this.loadData(this.paginator);
-
-
+    
     this.formCtrlSub = this.firstNameControl.valueChanges
       .debounceTime(1500)
       .subscribe(newValue => {
@@ -75,7 +74,6 @@ export class UserComponent implements OnInit {
           });
         }
       });
-
   }//ngoninit
 
   edit(data: any) {
@@ -84,8 +82,7 @@ export class UserComponent implements OnInit {
     this.router.navigate(['home/User/edit'], {
       queryParams:
         {
-          "id": data.id, "firstname": data.firstname, "lastname": data.lastname
-          , "email": data.email, "phone": data.phone, "objectId": data._id
+          "id": data.id
         }
     });
   }//edit
@@ -93,10 +90,7 @@ export class UserComponent implements OnInit {
   view(data: any) {
     this.router.navigate(['home/User/view'], {
       queryParams: {
-        "id": data.id,
-        "firstname": data.firstname, "lastname": data.lastname
-        , "email": data.email, "phone": data.phone, "createdDate": data.createdDate
-        , "updatedDate": data.updatedDate, "status": data.status
+        "id": data.id
       }
     });
   }
@@ -122,11 +116,8 @@ export class UserComponent implements OnInit {
         this.service.deleteData(data._id).subscribe((res) => {
           console.log("delete : server result", res);
           if (res['status'] == 'true') {
-            console.log(res['validation']);
             this.loadData(this.paginator);
-          } else {
-            console.log(res['validation']);
-          }
+          } 
         });
       }//if
     });
@@ -138,14 +129,13 @@ export class UserComponent implements OnInit {
     //     console.log("filter :",this.firstName);
     this.service.getData(event.pageIndex, event.pageSize, this.firstName, this.sort.active, this.sort.direction).subscribe(response => {
       var res = response['user'];
-      console.log("server get all users data :", res);
+      console.log("server get all users data :", response);
       this.dataSource = new MatTableDataSource(res['result'] as Array<any>);
       this.length = res['totalRecords'];
       //console.log("lengthscxz",this.length);
       this.pageIndex = res['nextPage'];
       this.pageSize = this.paginator.pageSize;
       this.data1 = this.dataSource.data;
-
     })
   }
 

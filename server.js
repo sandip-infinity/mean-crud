@@ -1,6 +1,12 @@
 var express = require('express');
 var cors = require('cors')
+const crypto = require('crypto');
 
+var fs = require("fs")
+var multer  = require('multer');
+var upload = multer({ dest: '/home/infinity/mean-crud/src/assets/images/' });
+
+//var FileReader=require('filereader');
 app = express();
 app.use(cors());
 var bodyParser = require('body-parser');
@@ -23,6 +29,9 @@ var userSchema = Schema({
 	email: String,
 	phone: Number,
 	password: String,
+	birthDate:String,
+	age:Number,
+	profile:String,
 	createdDate: String,
 	updatedDate: String,
 	status: String,
@@ -35,25 +44,49 @@ Users.find({}, function(err, data) {
 		console.log(data, data.length); 
 	});*/
 
+//findById
+app.get('/user/getById/:userId',function (req, res){
+	console.log("get data by specific id :",req.params.userId);
+	Users.find({'id':req.params.userId}, function(err,docs) { 
+		//console.log(data, data.length); 
+		let encode,decode,filename;
+		for(let i=0;i<docs.length;i++){
+			//console.log("profile name",docs[i].profile);
+			filename=docs[i].profile;
+				encode=base64_encode(docs[i].profile);
+				decode=base64_decode(encode);
+				docs[i].profile=decode;
+				
+		}
+		res.send({'docs':docs,'filename':filename});
+	});
+});
 
 //add
 app.post('/user/add', function (req, res) {
 	console.log("save data", req.body);
+	
 	var today = new Date();
+	console.log("Date ", today);
 	var dd = today.getDate();
 	var mm = today.getMonth() + 1; //January is 0!
 	var yyyy = today.getFullYear();
 	if (dd < 10) { dd = '0' + dd; }
 	if (mm < 10) { mm = '0' + mm; }
-	var today = dd + '/' + mm + '/' + yyyy;
+	//var today = dd + '/' + mm + '/' + yyyy;
 	//console.log("Date ", today);
 	Users.find({}, function (err, data) {
 		if (data) {
-			//console.log(data); 
+			//console.log(data);
+			let mad5Pass=crypto.createHash('md5').update(req.body.password).digest("hex"); 
+			console.log("hash map :",mad5Pass);
 			new Users({
 				'id': data.length + 1, 'firstname': req.body.firstname,
 				'lastname': req.body.lastname, 'email': req.body.email,
-				'phone': req.body.phone, 'password': req.body.password,
+				'phone': req.body.phone, 'password':mad5Pass,
+				'birthDate':req.body.birthDate,
+				'age':req.body.age,
+				'profile':(data.length + 1)+'_'+req.body.profile,
 				'createdDate': today, 'updatedDate': '',
 				'status': 'active'
 			}).save(function (err, doc) {
@@ -76,10 +109,13 @@ app.post('/user/add', function (req, res) {
 app.delete('/user/delete/:userId', function (req, res) {
 	console.log("delete data", req.params.userId);
 	var doc = {};
-	Users.find({ '_id': ObjectID(req.params.userId) }, function (err, data) {
-		console.log("data", data);
+	Users.findOne({"_id" : ObjectID(req.params.userId) }, function (err, data) {
+		if(!err){
+			console.log("data", data);
 		doc = data;
+		}
 	});
+	
 	Users.remove({ '_id': ObjectID(req.params.userId) }, function (err) {
 		if (err) res.send({
 			 'status': 'false', 
@@ -105,11 +141,17 @@ app.put('/user/update/:userId', function (req, res) {
 	var today = dd + '/' + mm + '/' + yyyy;
 	console.log("Date ", today);
 
+	var count=0;
+	Users.count(function(err,data){
+		if(!err){
+			count=data;
+		}
+	})
 	var id = { '_id': ObjectID(req.params.userId) };
 	var newvalues = {
 		$set: {
 			firstname: req.body.firstname, lastname: req.body.lastname, email: req.body.email,
-			phone: req.body.phone, updatedDate: today
+			phone: req.body.phone, updatedDate: today,profile:req.body.profile
 		}
 	};
 
@@ -146,10 +188,13 @@ app.put('/user/setNewPass/:userId', function (req, res) {
 		 });
 		else res.send({
 			'status': 'true',
-			'info': 'password update successfullu'
+			'info': 'password update successfully'
 		});
 	});
 });
+var result2;
+	obj=[];
+	var array=[];
 
 //load data 
 app.get('/user/get/:pageIndex/:pageSize/:sortActive/:sortDirection', function (req, res) {
@@ -182,21 +227,59 @@ app.get('/user/get/:pageIndex/:pageSize/:sortActive/:sortDirection', function (r
 		query.skip(skip);
 		query.limit(size);
 	}
+  
+	
 	query.exec(function (err, docs) {
-		console.log("resultbvjnvn", docs);
-		var result2 = {
-			"totalRecords": totalcount,
-			"nextPage": pageNo,
-			"result": docs
-		};
-		res.send({
-			'status': 'true',
-			'user': result2,
-			'info': 'get success'
-		});
+//		console.log("docs:",docs);
+		let encode,decode;
+		let s=[];
+		for(let i=0;i<docs.length;i++){
+		console.log("profile name",docs[i].profile);
+			if(docs[i].profile==='undefined'){
+				let str='0_passingcertificate.jpg';
+				console.log("cdcs",str);
+				encode=base64_encode(str);
+				console.log("encoded string :",encode);
+			}else{
+				encode=base64_encode(docs[i].profile);
+			//	console.log("encoded string :",encode);
+				decode=base64_decode(encode);
+				docs[i].profile=decode;
+				s.push(decode);
+			//	console.log("decoded string :",decode);
+			}
+		}
+//		console.log("decoded string :",docs);
+		result2 = {
+				"totalRecords": totalcount,
+				"nextPage": pageNo,
+				"result": docs,
+			};
+			res.send({
+					'status': 'true',
+					'user': result2,
+					'info': 'get success',
+					
+				});	
 	});
-
+	
 });
+
+function base64_encode(file) {
+	// read binary data
+	console.log("dgzxC",file);
+	var bitmap = 
+	fs.readFileSync('./src/assets/images/'+file);
+	
+	return new Buffer(bitmap).toString('base64');
+    // convert binary data to base64 encoded string
+}
+
+function base64_decode(base64str) {
+    // create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
+	var bitmap ='data:image/jpg;base64,'+base64str;
+	return bitmap;
+}
 
 //filter
 app.get('/user/search/:pageIndex/:pageSize/:filterValue', function (req, res) {
@@ -227,13 +310,47 @@ app.get('/user/search/:pageIndex/:pageSize/:filterValue', function (req, res) {
 	});
 });
 
-
+//fileupload
+var type=upload.single('avatar');
+app.post("/user/uploading",type,function(req,res,next){
+	var id=0;
+	
+	Users.count({}, function(err, data) { 
+		if(err) throw error;
+		if(data){
+			console.log("filename :",req.file.originalname); 
+			id=data+1;
+			var tmp_path = req.file.path;
+			var target_path ='/home/infinity/mean-crud/src/assets/images/'+id+'_'+req.file.originalname;
+		  
+			var src = fs.createReadStream(tmp_path);
+			var dest = fs.createWriteStream(target_path);
+		  
+			src.pipe(dest,function(e,d){console.log(e)});
+			fs.unlink(tmp_path,function(e,d){console.log(e)}); 
+			src.on('end', function() { 
+		  res.send({'filename':req.file.originalname});});
+		}
+	});
+});
 
 //login
 app.post("/user/login", function (req, res) {
 	console.log("login : ", req.body);
 	Users.find({ $or: [{ phone: req.body.phone }, { password: req.body.password }] }, function (err, data) {
 		if (data) {
+			let encode,decode;
+			for(let i=0;i<data.length;i++){
+				if(data[i].profile==='undefined'){
+					let str='0_passingcertificate.jpg';
+					encode=base64_encode(str);
+				}else{
+					encode=base64_encode(data[i].profile);
+					decode=base64_decode(encode);
+					data[i].profile=decode;
+				}
+				
+			}
 			console.log(data);
 			res.send(data);
 		}
