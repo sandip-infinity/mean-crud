@@ -6,6 +6,9 @@ export class DataControlService {
 
   url:string = 'http://localhost:4001/user';
   constructor(private http:HttpClient) { }
+
+  url1:string = 'http://localhost:4001/product';
+  
   
   getData(pageIndex,pageSize,filtervalue,sortActive,sortDirection){
     console.log("bdhascbzx",pageSize,    this.url+'/get/'+pageIndex+'/'+pageSize+'/'+filtervalue+'/'+
@@ -14,9 +17,14 @@ export class DataControlService {
       sortActive+'/'+sortDirection);
   }
 
+  getData1(pageIndex,pageSize,filtervalue,sortActive,sortDirection){
+    return this.http.get(this.url+'/getproduct/'+pageIndex+'/'+pageSize+'/'+
+  sortActive+'/'+sortDirection);
+  }
+
   saveData(post){
-     //console.log("post data:",post);
-     var hello="hello";
+    console.log("post data:",post);
+   //  var hello="hello";
      return this.http.post(this.url+'/add',post);
    }
 
@@ -24,13 +32,27 @@ export class DataControlService {
      //console.log("delete data",id);
      return this.http.delete(this.url+ "/delete/" +id);
    }
+  //  deleteData1(pid) {
+  //   //console.log("delete data",id);
+  //   return this.http.delete(this.url+ "/delete/" +pid);
+  // }
 
-   updateData(post,id) {
-//    console.log("update data",post);
+   updateData(id,post) {
+     //    console.log("update data",id,post);
     return this.http.put(this.url+'/update/'+id,post);
+  }
+
+  setNewPass(id,newPass){
+    
+    let v={'newPass':newPass};
+   // console.log("csdjc",v)
+    return this.http.put(this.url+'/setNewPass/'+id,v);
   }
 
   public search(pageIndex,pageSize,filterValue):any{
     return this.http.get(this.url+'/search/'+pageIndex+'/'+pageSize+'/'+filterValue);
+   }
+   public search1(pageIndex,pageSize,filterValue):any{
+    return this.http.get(this.url1+'/search/'+pageIndex+'/'+pageSize+'/'+filterValue);
    }
 }

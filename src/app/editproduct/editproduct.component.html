@@ -1,0 +1,38 @@
+<div class="signin-content">
+    <div class="div-a">
+        <div class="div-b">
+            <h1> Edit Product Information</h1>
+        </div>
+   </div>
+  
+  <mat-card>
+    <mat-card-content>
+        <form [formGroup]="updateproductForm" (ngSubmit)="onSubmit()">
+          <mat-input-container class="full-width-input">
+            <input matInput placeholder=" Product Name" formControlName="productname" required >
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput  placeholder="Description"   formControlName="description" >
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput placeholder="Price"   formControlName="price" required>
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput  placeholder="Supplier"   formControlName="supplier"  required>
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput  placeholder="Manufacturing Started Date"   formControlName="manufacturingDate"  required>
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+              <input matInput  placeholder="Delivery Date"   formControlName="deliveryDate"  required>
+            </mat-input-container>
+  
+          <button mat-raised-button color="primary" type="button" (click)="cancle()">cancle</button>
+          <button mat-raised-button color="primary" type="submit">update</button>
+          
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  

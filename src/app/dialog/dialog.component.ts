@@ -1,5 +1,5 @@
-import { Component, OnInit,Inject } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA,MatDialogRef} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-dialog',
@@ -8,13 +8,17 @@ import {MatDialog, MAT_DIALOG_DATA,MatDialogRef} from '@angular/material';
 })
 export class DialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  data: any;
+
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(p => {
+      this.data = p;
+    });
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  close(): void {
+    this.router.navigate(['home/User']);
   }
 }

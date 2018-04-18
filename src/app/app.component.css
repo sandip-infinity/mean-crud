@@ -1,13 +1,13 @@
 @import url('//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css');
 
-  mat-card {
-    padding: 0!important;
-    width: 50%;
-    height: 80%;
-  }
-    mat-toolbar {
-      background-color: blue;
-      width: 50%;
-      height: 80%;
+    .main {
+      justify-content: space-between; 
     }
- 
+
+    mat-card{
+      justify-content: space-around;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-top: 20px;
+      margin-bottom:20px;
+    }

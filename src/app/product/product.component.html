@@ -1,0 +1,74 @@
+<div class="example-container mat-elevation-z8">
+
+  <div class="example-header">
+    <div style="float: right;">
+      <i class="material-icons" (click)="addproduct()">add</i>
+    </div>
+    <div style="float:left;width:25%;">
+      <mat-form-field>
+        <input type=text matInput [value]="productname" placeholder="filter" [formControl]="productnameControl">
+      </mat-form-field>
+    </div>
+  </div>
+  
+
+  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+
+    <ng-container matColumnDef="pid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Product ID. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.pid}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="productname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Product Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.productname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Description</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="supplier">
+      <mat-header-cell *matHeaderCellDef> Supplier </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.supplier}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="manufacturingDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Manufacturing Date</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.manufacturingDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Delivery Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.deliveryDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <i class="material-icons" (click)="editproduct(element)">edit</i>
+        <i class="material-icons" (click)="viewproduct(element)">visibility</i>
+        <i class="material-icons" (click)="deleteproduct(element)">delete</i>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [length]="length"
+   [pageSize]="pageSize"
+   [pageSizeOptions]="pageSizeOptions" 
+   (page)="pageevent($event)"
+    [showFirstLastButtons]="true">
+  </mat-paginator>
+
+</div>

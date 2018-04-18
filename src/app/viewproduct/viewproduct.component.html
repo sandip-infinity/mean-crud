@@ -1,0 +1,58 @@
+<div class="signin-content">
+  <!-- <div class="div-1">
+        <div  class="div-2">
+            <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
+        </div>          
+  </div> -->
+  <div class="div-a">
+      <div class="div-b">
+          <h1> Product Information</h1>
+      </div>
+ </div>
+
+<mat-card>
+  <mat-card-content>
+      <form [formGroup]="proForm">
+          <mat-grid-list cols="2" rowHeight="2:1">
+
+          <mat-grid-tile>
+              <mat-input-container class="full-width-input">
+                  <input matInput placeholder=" Product Name" formControlName="productname" required >
+              </mat-input-container>
+          </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-input-container class="full-width-input">
+                <input matInput  placeholder="Description"   formControlName="description" >
+              </mat-input-container>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-input-container class="full-width-input">
+                <input matInput placeholder="Price"   formControlName="price" required>
+            </mat-input-container>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-input-container class="full-width-input">
+                <input matInput  placeholder="Supplier"   formControlName="supplier"  required>
+            </mat-input-container>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-input-container class="full-width-input">
+                <input matInput  placeholder="Manufacturing Started Date"   formControlName="manufacturingDate"  required>
+            </mat-input-container>
+        </mat-grid-tile>  
+        <mat-grid-tile>
+            <mat-input-container class="full-width-input">
+                <input matInput  placeholder="Delivery Date"   formControlName="deliveryDate"  required>
+            </mat-input-container>
+        </mat-grid-tile> 
+        <mat-grid-tile></mat-grid-tile>
+        <mat-grid-tile>
+        <button mat-raised-button class="ok"  (click)="ok()">OK</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+      </form>
+   
+    </mat-card-content>
+  </mat-card>
+</div>
+

@@ -1,8 +1,4 @@
-mat-card-head{
-    /* transition: none !important; */
-    /* no-shadow: none !important; */
-    
-}
+
 mat-card-create{
     border-radius: 10px;
 }
@@ -41,41 +37,6 @@ mat-card {
   .forget{
       float: right;
   }
-/* .div-1{
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    background-color: rgb(10, 12, 148) !important;
-    color: white;
-    padding: 4px !important;
-   
-}
-
-.div-2{
-    width: 50px;}
-img{
-    width: 71px;
-}
-
-.div-3{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.div-4{
-    text-align: center;
-}
-
-div {
-    display: block;
-} */
-
-
-/* .b1{
-    width: 50px;
-} */
-
 .b2{
 width: 252px;
 border-radius: 10px;

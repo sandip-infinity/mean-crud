@@ -25,6 +25,7 @@ public app:AppComponent ){}
 
   
 
+  
   ngOnInit(){
     this.userForm=this._formBuilder.group({
       phone:["",[Validators.required,Validators.maxLength(10)]],
@@ -42,13 +43,23 @@ public app:AppComponent ){}
     this.route.navigateByUrl('login'); 
    }
    else{   
-    console.log(result);
+   
     console.log("Login Success");
     this.app.profiledata=result;
+    console.log(this.app.profiledata);
     this.route.navigateByUrl('home');
        }  
     });
 
+    // this.http.post("http://localhost:4001/user/login",this.userForm.value).subscribe(result => {
+    //   console.log("Valid User",result);
+    //   this.app.profile=result;
+    //   this.app.currentUser=result[0].firstname;
+    //   this.app.flag=true;
+    //   this.route.navigateByUrl('/home');
+    //  },(error)=>{
+    //    console.log("Invalid User");
+    //   });
   }
   register(){
     this.route.navigateByUrl('register');

@@ -1,9 +1,35 @@
 <button mat-raised-button color="primary" (click)="Logout()">Logout</button>
 
-<h1>Hi {{app.profiledata[0].firstname}}!!</h1>
-
+<h1>Hi!!</h1>
+<mat-card>
 <body style="margin-top:50px;margin-left:50px;margin-right:50px">
-     <nav mat-tab-nav-bar style="width:50%">
+     <nav mat-tab-nav-bar style="width:100%">
+<div>
+        <nav mat-tab-nav-bar>
+                <a mat-tab-link *ngFor="let tabLink of routeLinks; let i = index" 
+                 [routerLink]="tabLink.link" [active]="activeLinkIndex === i" 
+                 (click)="activeLinkIndex = i">
+                        {{tabLink.label}}
+                </a>
+        </nav>
+        <router-outlet></router-outlet>
+</div>
+</nav>
+</body>
+</mat-card>
+
+<!--
+        <div class="demo-tab-group">
+        <mat-tab-group>
+                <mat-tab label="User">
+                        <app-user></app-user>
+                </mat-tab>
+                <mat-tab label="Profile">
+                        <app-profile></app-profile>
+                </mat-tab>
+        </mat-tab-group>
+</div>
+        <nav mat-tab-nav-bar>
                 
                         <a mat-tab-link
                         *ngFor="let tabLink of tabLinks; let i = index"
@@ -13,10 +39,7 @@
                         >
                         {{tabLink.label}}
                         </a>
-                  
         </nav>
-
-
-      
-      <router-outlet></router-outlet>
-</body>
+        <div>
+                <router-outlet></router-outlet>
+        </div> -->
