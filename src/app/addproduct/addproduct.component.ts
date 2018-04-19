@@ -6,7 +6,8 @@ import { Router } from '@angular/router'
 import 'rxjs/add/operator/map';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { EqualTextValidator } from "angular2-text-equality-validator";
-
+import { Moment } from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-addproduct',
@@ -30,8 +31,8 @@ export class AddproductComponent implements OnInit {
       description:[""],
       price:[""],
       supplier:[""],
-      manufacturingDate:[""],
-      deliveryDate:[""],
+      manufacturingDate:[],
+      deliveryDate:[],
       status:[""]
     });
   }
@@ -41,13 +42,11 @@ export class AddproductComponent implements OnInit {
     this.http.post("http://localhost:4001/addproduct",this.productForm.value).subscribe(result =>{
       //  console.log("Successfully added");
       //  console.log("responce",result);
-      
-
       this.router.navigate(['/home/product']);
     })
   
   }
   cancle(){
-    this.router.navigate(['/home/peoduct']);
+    this.router.navigate(['/home/product']);
   }
 }

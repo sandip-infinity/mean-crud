@@ -15,16 +15,35 @@
           <input matInput  placeholder="Description"   formControlName="description" >
         </mat-input-container>
         <mat-input-container class="full-width-input">
-          <input matInput placeholder="Price"   formControlName="price" required>
+          <input matInput placeholder="Price" type="number"   formControlName="price" required>
         </mat-input-container>
         <mat-input-container class="full-width-input">
           <input matInput  placeholder="Supplier"   formControlName="supplier"  required>
         </mat-input-container>
         <mat-input-container class="full-width-input">
-          <input matInput  placeholder="Manufacturing Started Date"   formControlName="manufacturingDate"  required>
+          <input matInput type="date" placeholder="Manufacturing Started Date"   formControlName="manufacturingDate"  required>
         </mat-input-container>
 
-        <button mat-raised-button color="primary" type="button" (click)="close()">cancle</button>
+        <mat-input-container class="full-width-input">
+            <input matInput type="date" placeholder="Delivery Date"   formControlName="deliveryDate"  required>
+          </mat-input-container>
+
+        
+          <!-- <mat-form-field>
+              <input matInput [matDatepicker]="picker" type="date" placeholder="Manufacturing Started Date" formControlName="manufacturingDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+      
+
+        
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" type="date" placeholder="Delivery Date" formControlName="manufacturingDate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field> -->
+         
+        <button mat-raised-button color="primary" type="button" (click)="cancle()">cancle</button>
         <button mat-raised-button color="primary" type="submit">Add Product</button>
         
       </form>

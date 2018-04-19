@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter,Inject} from '@angular/core';
-import { MatGridListModule, MatButtonModule, MAT_DIALOG_DATA, MatInputModule, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+import { MatGridListModule, MatButtonModule, MAT_DIALOG_DATA, MatInputModule, MatDialog, MatDialogRef, MatSnackBar,MatDatepicker } from '@angular/material';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Moment } from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-editproduct',
@@ -42,15 +43,17 @@ onSubmit(){
 console.log(this.updateproductForm.value);
 this.http.post("http://localhost:4001/update",this.updateproductForm.value).subscribe((Result)=>{
   console.log(Result);
-  this.router.navigate(['home/product']);
+  // this.router.navigate(['home/product']);
 
   this.Dialogref.close(true);
+  // this.Dialogref.close();
 });
 
 }
 
 cancle(){
-  this.router.navigate(['home/product']);
+  this.Dialogref.close();
+  // this.router.navigate(['home/product']);
 }
 
 }

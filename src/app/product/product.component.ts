@@ -77,7 +77,7 @@ export class ProductComponent implements OnInit {
       } else
        {
         console.log("filter value :", this.productname);
-        this.service.search(this.paginator.pageIndex, this.paginator.pageSize, this.productname).subscribe((res) => {
+        this.service.search1(this.paginator.pageIndex, this.paginator.pageSize, this.productname).subscribe((res) => {
           console.log('filter result :', res);
           this.dataSource = new MatTableDataSource(res as Array<any>);
         });

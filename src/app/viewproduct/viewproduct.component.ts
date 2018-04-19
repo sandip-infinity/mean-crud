@@ -3,7 +3,8 @@ import { MatGridListModule, MatButtonModule, MAT_DIALOG_DATA, MatInputModule, Ma
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { Moment } from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-viewproduct',
@@ -38,7 +39,7 @@ export class ViewproductComponent implements OnInit {
   }
 
 
-  ok(){
+  close(){
     this.thisDialogref.close();
     this.router.navigate(['home/product']);
   }

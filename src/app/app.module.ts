@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatIconModule,MatDatepickerModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
 import { MatTableModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,7 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { DialogComponent } from './dialog/dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material';
 import { DataControlService } from './data-control.service';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -42,6 +42,9 @@ import { AddproductComponent } from './addproduct/addproduct.component';
 import { DeleteproductComponent } from './deleteproduct/deleteproduct.component';
 import { ViewproductComponent } from './viewproduct/viewproduct.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatDatepickerModule } from '@angular/material'
+
 
 @NgModule({
   declarations: [
@@ -69,7 +72,8 @@ import { EditproductComponent } from './editproduct/editproduct.component';
     BrowserModule, HttpClientModule, MatIconModule, MatTableModule, MatPaginatorModule, MatMenuModule,
     NoopAnimationsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSnackBarModule,
     MatButtonModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatToolbarModule,
-    MatCardModule, MatSortModule, MatProgressSpinnerModule, BrowserAnimationsModule, MatTabsModule,MatDatepickerModule,HttpModule,
+    MatCardModule, MatSortModule, MatProgressSpinnerModule, BrowserAnimationsModule, MatTabsModule,
+    MatDatepickerModule,HttpModule,MatDatepickerModule,MatMomentDateModule, 
     RouterModule.forRoot([
       { path: "update", redirectTo: "update", pathMatch: "full" },
 

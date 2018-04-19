@@ -415,7 +415,7 @@ app.get('/user/getproduct/:pageIndex/:pageSize/:sortActive/:sortDirection', func
 });
 	
 
-app.get('/user/search/:pageIndex/:pageSize/:filterValue', function (req, res) {
+app.get('/product/search/:pageIndex/:pageSize/:filterValue', function (req, res) {
 	console.log("get data2", req.params.pageIndex, req.params.pageSize, req.params.filterValue);
 	var param = req.params.filterValue;
 	console.log("param :", param);

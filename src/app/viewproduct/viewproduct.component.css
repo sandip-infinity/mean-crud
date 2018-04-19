@@ -1,4 +1,4 @@
-.div-a{
+/* .div-a{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,7 +51,7 @@ button{
     justify-content: flex-start;
     width: 100%;
     /* -webkit-box-pack: start; */
-}
+/* }
 
 
 
@@ -59,4 +59,18 @@ button{
 
 div {
     display: block;
+}  */
+
+
+
+mat-card {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+
+.div{
+    justify-content: space-between;
 }

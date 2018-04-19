@@ -1,9 +1,4 @@
-<div class="signin-content">
-  <!-- <div class="div-1">
-        <div  class="div-2">
-            <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
-        </div>          
-  </div> -->
+<!-- <div class="signin-content">
   <div class="div-a">
       <div class="div-b">
           <h1> Product Information</h1>
@@ -45,7 +40,7 @@
                 <input matInput  placeholder="Delivery Date"   formControlName="deliveryDate"  required>
             </mat-input-container>
         </mat-grid-tile> 
-        <mat-grid-tile></mat-grid-tile>
+         <mat-grid-tile></mat-grid-tile>
         <mat-grid-tile>
         <button mat-raised-button class="ok"  (click)="ok()">OK</button>
         </mat-grid-tile>
@@ -55,4 +50,56 @@
     </mat-card-content>
   </mat-card>
 </div>
+ -->
 
+
+
+ <mat-card>
+ <h3>
+    <b>Product Information</b>
+  </h3>
+  <div class="row">
+    <div class="col-lg-12">
+      <Label> Product Id : </Label>{{data.pid}}
+    </div>
+  
+    <div class="col-lg-12">
+      <Label>Product Name : </Label>{{data.productname}}
+    </div>
+  
+    <div class="col-lg-12">
+      <Label>Description : </Label>{{data.description}}
+    </div>  
+    <div class="col-lg-12">
+      <label>Supplier :</label>{{data.supplier}}
+    </div>
+
+    <div class="col-lg-12">
+      <Label>
+          Price :
+      </Label>{{data.price}}
+    </div>
+  
+    <div class="col-lg-12">
+      <Label>
+          Manufacturing Started Date :
+      </Label>{{data.manufacturingDate}}
+    </div>
+  
+    <div class="col-lg-12">
+      <Label>
+          Delivery Date :
+      </Label>{{data.deliveryDate}}
+    </div>
+  
+    <div class="col-lg-12">
+      <Label>Status : </Label>{{data.status}}
+    </div>
+  
+    
+  
+    <div class="col-lg-12">
+      <button mat-raised-button color="primary" (click)="close()">Ok</button>
+    </div>
+  </div>
+</mat-card>
