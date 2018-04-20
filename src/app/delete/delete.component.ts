@@ -8,6 +8,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class DeleteComponent implements OnInit {
   @Output() onAdd = new EventEmitter<any>(true);
+  
   constructor(public dialogRef: MatDialogRef<DeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
