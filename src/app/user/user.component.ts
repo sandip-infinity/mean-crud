@@ -9,11 +9,11 @@ import { Router, ActivatedRoute } from '@angular/router'
 
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { DataControlService } from '../data-control.service';
-import { DialogComponent } from '../dialog/dialog.component';
-import { DeleteComponent } from '../delete/delete.component';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { DialogDataExampleDialogComponent } from '../dialog-data-example-dialog/dialog-data-example-dialog.component';
+import { DataControlService } from './_services/data-control.service';
+import { DialogComponent } from './viewUser/dialog.component';
+import { DeleteComponent } from './deleteUser/delete.component';
+import { EditDialogComponent } from './editUser/edit-dialog.component';
+import { DialogDataExampleDialogComponent } from './addUser/dialog-data-example-dialog.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',

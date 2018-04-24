@@ -1,0 +1,75 @@
+<h3>
+  <b>User Data</b>
+</h3>
+<div class="row" *ngIf="flag">
+  <div class="col-lg-12">
+    <Label>Id : </Label>{{data.id}}
+  </div>
+
+  <div class="col-lg-12">
+    <Label>First Name : </Label>&nbsp;&nbsp;{{data.firstname}}
+  </div>
+
+  <div class="col-lg-12">
+    <Label>Last Name : </Label>&nbsp;&nbsp;{{data.lastname}}
+  </div>
+
+  <div class="col-lg-12">
+    <Label>
+      <mat-icon>email</mat-icon>
+    </Label>&nbsp;&nbsp;{{data.email}}
+  </div>
+
+  <div class="col-lg-12">
+    <Label>
+      <mat-icon>phone</mat-icon>
+    </Label>&nbsp;&nbsp;{{data.phone}}
+  </div>
+
+  <div class="col-lg-12">
+      <Label>
+       Birth Date :
+      </Label>&nbsp;&nbsp;{{data.birthDate}}
+  </div>
+    
+  <div class="col-lg-12">
+      <Label>
+        Age :
+      </Label>&nbsp;&nbsp;{{data.age}}
+    </div>
+
+    <div class="col-lg-12">
+        <Label>
+          <mat-icon>phone</mat-icon>
+        </Label>&nbsp;&nbsp;{{data.phone}}
+      </div>
+
+  <div class="col-lg-12">
+    <Label>
+     created Date :
+    </Label>&nbsp;&nbsp;{{data.createdDate}}
+  </div>
+
+  <div class="col-lg-12">
+    <Label>
+      updated Date :
+    </Label>&nbsp;&nbsp;{{data.updatedDate}}
+  </div>
+
+  <div class="col-lg-12">
+    <Label>
+    Profile 
+    </Label>&nbsp;&nbsp;
+    <img src="{{data.profile}}" height="100px" width="100px">
+  </div>
+
+  <div class="col-lg-12">
+    <Label>Status : </Label>&nbsp;&nbsp;{{data.status}}
+  </div>
+
+  <div class="col-lg-12"></div>
+
+  <div class="col-lg-12">
+    <button mat-raised-button color="primary" (click)="close()">Ok</button>
+  </div>
+</div>

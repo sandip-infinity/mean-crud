@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) {
     this.routeLinks = [
       { label: 'User', link: 'User' },
-      { label: 'Profile', link: 'Profile' }];
+      { label: 'Profile', link: 'Profile' },
+      { label: 'Department', link: 'Department' },
+      { label: 'Product', link: 'Product' },];
 
     this.activeLinkIndex = this.routeLinks.indexOf(this.routeLinks.find(
       tab => router.url.indexOf(tab.link) != -1)

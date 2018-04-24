@@ -1,0 +1,36 @@
+<h3>
+  <b>Update Data</b>
+</h3>
+<form [formGroup]="form">
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="First Name" formControlName="firstname">
+      <mat-error *ngIf="form.controls['firstname'].hasError('required')">First Name is required</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Last Name" formControlName="lastname">
+      <mat-error *ngIf="form.controls['lastname'].hasError('required')">Last Name is required</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error *ngIf="form.controls['email'].hasError('required')">Email is required</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="number" matInput placeholder="Phone" formControlName="phone">
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-error *ngIf="form.controls['phone'].hasError('required')">Phone No is required</mat-error>
+      <mat-error *ngIf="form.controls['phone'].hasError('minLength')">Min length 10</mat-error>
+    </mat-form-field>
+    <div><span>profile</span>
+      <img src="{{profile}}" height="100px" width="100px">
+      <input type="file" id="avatar" formControlName="profile" placeholder="choose new" (change)="onFileChange($event)" accept="image/*" #fileInput>
+    </div>
+  </div>
+  <br>
+  <button mat-raised-button color="primary" (click)="update()">Update</button>
+  <button mat-raised-button color="primary" (click)="close()">Cancel</button>
+</form>

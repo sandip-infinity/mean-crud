@@ -1,0 +1,44 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    justify-content: space-between;
+    text-align: center;
+    padding: 5px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 10px;
+    justify-content: space-between;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .mat-cell{
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+  .mat-header-cell{
+    justify-content: space-around;
+    text-align:center;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  
+  .material-icons {
+    color:gray;
+  }
+  
+  .material-icons:active,i.material-icons:hover,i.material-icons:focus{
+      /* background-color:blue; */
+      color:blue;
+    }
+    

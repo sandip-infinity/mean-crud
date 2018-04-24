@@ -1,30 +1,46 @@
-<!-- <div class="container">
-  <header>
-    <div layout="row" >
-        <img src="https://cdn.onlinewebfonts.com/svg/img_464825.png">
-        <h1 style="color:white">Login Employee</h1>
-    </div>
-  </header>-->
 <div class="signin-content">
-    <mat-card>
-      <mat-card-content>
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-          <p>Please login to continue</p>
-          <mat-input-container class="full-width-input">
-            <input matInput placeholder=" Phone No." formControlName="phone" required>
-            <!-- <mat-error *ngIf="isFieldInvalid('phno')"> 
-              Please inform your phone no.
-            </mat-error> -->
-          </mat-input-container>
-          <mat-input-container class="full-width-input">
-            <input matInput type="password" placeholder="Password"   formControlName="password" required>
-            <!-- <mat-error *ngIf="isFieldInvalid('password')">
-              Please inform your password
-            </mat-error> -->
-          </mat-input-container>
-          <button mat-raised-button color="primary" type="submit">Login</button>
-          <button mat-raised-button color="primary" (click)="register()">Sign up</button>
-        </form>
-      </mat-card-content>
-    </mat-card>
+  <div class="div-1">
+   <div  class="div-2">
+       <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
+   </div>          
   </div>
+  <div class="div-a">
+      <div class="div-b">
+       <h1> Sign in to Infinity</h1>
+      </div>
+    </div>
+<mat-card>
+  
+
+<mat-card-content>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <mat-input-container class="full-width-input" >
+  <input matInput placeholder="User Name" formControlName="phone" required>
+     <mat-error *ngIf="userForm.controls.phone.hasError('required')" class="alert alert-danger" >
+            Username/Phone No. Required
+      </mat-error>
+  </mat-input-container>
+
+  <div >
+    <a  (click)="forget()" class="forget">Forget Password?</a>
+  </div>
+  
+  <mat-input-container class="full-width-input">
+  <input matInput type="password" placeholder="Password"   formControlName="password" required>
+  </mat-input-container>
+  
+  <mat-card-actions>
+         <button mat-raised-button class="b2" color="primary" type="submit">Login</button>
+    </mat-card-actions>
+  
+</form>
+</mat-card-content>
+</mat-card>
+
+<mat-card class="mat-card-create">
+<div class="b1">New to Infinity?
+   <a (click)="register()">Create account</a>
+</div>      
+</mat-card>
+
+</div>

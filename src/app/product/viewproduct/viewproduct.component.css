@@ -1,0 +1,76 @@
+/* .div-a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div-1{
+   display: flex;
+   
+}
+img{
+    width: 100px;
+}
+
+
+mat-card {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+  }
+  .signin-content {
+    padding: 60px 1rem;
+  }
+  .full-width-input {
+    width: 100%;
+  }
+  p{
+      background-color:  rgb(91, 12, 196);
+      color: snow;
+  }
+
+  mat-card-title{
+    float: center;
+}
+  mat-card-subtitle{
+      color: white;
+      float: right;
+  }
+
+
+button{
+    background-color: mediumblue;
+    color: white;
+}
+
+
+
+
+.div-1{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    /* -webkit-box-pack: start; */
+/* }
+
+
+
+
+
+div {
+    display: block;
+}  */
+
+
+
+mat-card {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+
+.div{
+    justify-content: space-between;
+}

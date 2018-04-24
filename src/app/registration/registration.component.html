@@ -1,89 +1,48 @@
-<!-- <div class="container">
-        <header>
-          <div layout="row" >
-              <img src="https://cdn.onlinewebfonts.com/svg/img_464825.png">
-              <h1 style="color:white">Register Employee</h1>
-          </div>
-        </header>
-    
-        <form (ngSubmit)="onSubmit()" [formGroup]="userForm1">
-            <mat-grid-list cols="2:7" rowHeight="6:1">
-                <mat-grid-tile>
-                    <mat-form-field class="Form-Group" >
-                            <input matInput placeholder="First Name" formControlName="fnm" #fnm>
-                    </mat-form-field>
-                </mat-grid-tile>
-    
-                <mat-grid-tile>
-                    <mat-form-field class="Form-Group" >
-                            <input matInput placeholder="Last Name" formControlName="lnm" #lnm>
-                    </mat-form-field>
-                </mat-grid-tile>
-    
-                <mat-grid-tile>
-                    <mat-form-field class="Form-Group" >
-                            <input matInput placeholder="Phone No." formControlName="phno" #phno>
-                            
-                            <div *ngIf="userForm1.controls['phno'].hasError('pattern')" class="alert alert-danger" >
-                                please Enter 10 digits....
-                            </div>
-                    </mat-form-field>
-                </mat-grid-tile>
-    
-                <mat-grid-tile>
-                    <mat-form-field class="Form-Group" >
-                            <input matInput placeholder="Email" formControlName="email" #email>
-                    </mat-form-field>
-                </mat-grid-tile>
-    
-                <mat-grid-tile>
-                    <mat-form-field class="Form-Group" >
-                            <input matInput type="password" placeholder="Password" formControlName="pass" #pass>
-                    </mat-form-field>
-                </mat-grid-tile>
-    
-                <mat-grid-tile>
-                    <mat-form-field class="Form-Group" >
-                            <input matInput type="password" placeholder="Conform Password" formControlName="cpass" #cpass>
-                    </mat-form-field>
-                </mat-grid-tile>
-    
-                <mat-grid-tile class="Form-Group">
-                    <button mat-raised-button type="submit" >Register</button>
-                 </mat-grid-tile>
-    
-            </mat-grid-list>
-    
-        </form>
+<div class="signin-content">
+    <!-- <div class="div-1">
+          <div  class="div-2">
+              <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
+          </div>          
     </div> -->
-
-    <div class="signin-content">
-        <mat-card>
-          <mat-card-content>
-            <form [formGroup]="userForm1" (ngSubmit)="onSubmit()">
-              <p>Please Register Here</p>
-              <mat-input-container class="full-width-input">
-                <input matInput placeholder=" First Name" formControlName="firstname" >
-              </mat-input-container>
-              <mat-input-container class="full-width-input">
-                <input matInput  placeholder="Last Name"   formControlName="lastname" >
-              </mat-input-container>
-              <mat-input-container class="full-width-input">
-                <input matInput placeholder="Phone No."   formControlName="phone" required>
-              </mat-input-container>
-              <mat-input-container class="full-width-input">
-                <input matInput  placeholder="E-mail"   formControlName="email" >
-              </mat-input-container>
-              <mat-input-container class="full-width-input">
-                <input matInput type="password" placeholder="Password"   formControlName="password" required>
-              </mat-input-container>
-              <mat-input-container class="full-width-input">
-                <input matInput type="password" placeholder="Confirm Password"   formControlName="cpassword" required>
-              </mat-input-container>
-              <button mat-raised-button color="primary" type="submit">Register</button>
-              
-            </form>
-          </mat-card-content>
-        </mat-card>
-      </div>
-
+    <div class="div-a">
+        <div class="div-b">
+            <h1> Sign Up to Infinity</h1>
+        </div>
+   </div>
+  
+  <mat-card>
+    <mat-card-content>
+        <form [formGroup]="userForm1" (ngSubmit)="onSubmit()">
+          <mat-input-container class="full-width-input">
+            <input matInput placeholder=" First Name" formControlName="firstname" >
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput  placeholder="Last Name"   formControlName="lastname" >
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput placeholder="Phone No."   formControlName="phone" required>
+            <div *ngIf="userForm1.controls['phone'].hasError('pattern')" class="alert alert-danger" >
+                please Enter 10 digits....
+            </div>
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput  placeholder="E-mail"   formControlName="email"  required>
+            <span *ngIf="userForm1.hasError('email', 'email') && userForm1.get('email').touched" class="alert-danger">
+                Please enter valid email contains '@' , '.' .
+              </span>
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput type="password" placeholder="Password"   formControlName="password" required >
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput type="password" placeholder="Confirm Password"   formControlName="cpassword" required>
+            <div  *ngIf="userForm1.controls['cpassword'].errors?.MatchPassword && userForm1.get('cpassword').touched " class="alert alert-danger">
+                Password not match
+            </div>
+          </mat-input-container>
+          <button mat-raised-button [disabled]="!userForm1.valid" color="primary" type="submit">Register</button>
+          
+        </form>
+      </mat-card-content>
+    </mat-card>
+</div>

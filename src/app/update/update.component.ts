@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { DataControlService } from '../data-control.service';
+import { DataControlService } from '/home/infinity/mean-crud/src/app/user/_services/data-control.service';
 import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 

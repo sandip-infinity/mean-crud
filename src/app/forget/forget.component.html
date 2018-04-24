@@ -1,0 +1,25 @@
+<div class="signin-content">
+  <mat-card>
+    <mat-card-content>
+        <form [formGroup]="userForm2" (ngSubmit)="onSubmit()">
+            <div class="div-1">
+                <div  class="div-2">
+                    <img src="https://media.licdn.com/dms/image/C510BAQFQhMPOLdMp1w/company-logo_200_200/0?e=2159024400&v=beta&t=6E3tVnjsxwY8ple4O8J2ftZgJBRRBaEMJ1IhCZk36Gk" alt="">
+                </div>          
+          </div> 
+          <div class="div-a">
+                <div class="div-b">
+                    <h1>Find your email</h1>
+              </div>  
+           </div>
+            
+            <mat-input-container class="full-width-input">
+                <input matInput placeholder="Phone number or email" formControlName="email" >
+            </mat-input-container>
+            <div class="btn">
+            <button mat-raised-button color="primary" type="submit">Next</button>
+            </div>
+          </form>  
+      </mat-card-content>
+    </mat-card>
+  </div>

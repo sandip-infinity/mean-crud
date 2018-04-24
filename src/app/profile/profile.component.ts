@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { DataControlService } from '../data-control.service';
+import { DataControlService } from '/home/infinity/mean-crud/src/app/user/_services/data-control.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,14 +23,15 @@ export class ProfileComponent implements OnInit {
       lastname: new FormControl(this.app.profile[0].lastname, [Validators.required]),
       email: new FormControl(this.app.profile[0].email, [Validators.required]),
       phone: new FormControl(this.app.profile[0].phone, [Validators.required]),
-      password: new FormControl(this.app.profile[0].phone, [Validators.required])
+      birthDate: new FormControl(this.app.profile[0].birthDate, [Validators.required])
     });
+   
   }
 
   ngOnInit() {
     // console.log(this.app.profile)
+    console.log("profile :",this.app.profile[0]);
   }
-
 
   openSnackBar() {
     this._id = this.app.profile[0]._id;

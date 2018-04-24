@@ -1,0 +1,49 @@
+<mat-card>
+  <h3>
+    <b>Product Information</b>
+  </h3>
+  <div class="row" *ngIf="flag">
+    <div class="col-lg-12">
+      <Label> Product Id : </Label>{{data.pid}}
+    </div>
+
+    <div class="col-lg-12">
+      <Label>Product Name : </Label>{{data.productname}}
+    </div>
+
+    <div class="col-lg-12">
+      <Label>Description : </Label>{{data.description}}
+    </div>
+    <div class="col-lg-12">
+      <label>Supplier :</label>{{data.supplier}}
+    </div>
+
+    <div class="col-lg-12">
+      <Label>
+        Price :
+      </Label>{{data.price}}
+    </div>
+
+    <div class="col-lg-12">
+      <Label>
+        Manufacturing Started Date :
+      </Label>{{data.manufacturingDate}}
+    </div>
+
+    <div class="col-lg-12">
+      <Label>
+        Delivery Date :
+      </Label>{{data.deliveryDate}}
+    </div>
+
+    <div class="col-lg-12">
+      <Label>Status : </Label>{{data.status}}
+    </div>
+
+
+
+    <div class="col-lg-12">
+      <button mat-raised-button color="primary" (click)="close()">Ok</button>
+    </div>
+  </div>
+</mat-card>
