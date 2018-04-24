@@ -110,18 +110,15 @@ export class ProductComponent implements OnInit {
   }
 
   editproduct(data: any) {
-    // this.router.navigate(['User/edit'],{queryParams: {"id":data.id}});
-    //this.router.navigate(['User/edit',data.id,data.id]);
     this.router.navigate(['home/Product/editproduct'], {
       queryParams:
         {
-          "id": data.id
+          "id": data.pid
         }
     });
   }//edit
 
   viewproduct(data: any) {
-  
     this.router.navigate(['home/Product/viewproduct'], {
       queryParams: {
         "id": data.pid
